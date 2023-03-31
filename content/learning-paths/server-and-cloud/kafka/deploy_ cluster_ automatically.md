@@ -243,47 +243,86 @@ Install the Zookeeper and the required dependencies.
 Using a text editor, save the code below to in a file called `zookeeper_cluster.yaml`. This is the YAML file for the Ansible playbook. 
 
 ```console
----
-- hosts: all
-  become: yes
-  become_method: sudo
-  
-  pre_tasks:
-    - name: Update the Machine & Install PostgreSQL
-      shell: |
-             sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
-             sudo wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
-             sudo apt-get update
-             sudo apt-get install postgresql -y
-             sudo systemctl start postgresql
-             sudo systemctl status postgresql
-      become: true
-    - name: Update apt repo and cache on all Debian/Ubuntu boxes
-      apt:  upgrade=yes update_cache=yes force_apt_get=yes cache_valid_time=3600
-      become: true
-    - name: Install Python pip & Python package
-      apt: name={{ item }} update_cache=true state=present force_apt_get=yes
-      with_items:
-      - python3-pip
-      become: true
+- hosts: zookeeper1, zookeeper2, zookeeper3
+  become: True
+  vars:
+    - zk_1_ip: "3.134.244.225"
+    - zk_2_ip: "18.117.161.107"
+    - zk_3_ip: "3.17.129.114"
   tasks:
-    - name: "Find out if PostgreSQL is initialized"
-      ansible.builtin.stat:
-        path: "/var/lib/pgsql/main/pg_hba.conf"
-      register: init_status
 
-    - name: "Start and enable services"
-      service: "name={{ item }} state=started enabled=yes"
-      with_items:
-        - postgresql
+  - name: Update machines and install Java, Zookeeper
+    shell: |
+           apt update
+           apt install -y default-jdk
+           mkdir Zookeeper_node
+           cd Zookeeper_node/ && wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz && tar -xzf apache-zookeeper-3.8.0-bin.tar.gz && cd apache-zookeeper-3.8.0-bin
+
+  - name: On zookeeper1 instance create Zookeeper directory
+    when: "'zookeeper1' in group_names"
+    shell: mkdir /tmp/zookeeper && echo 1 >> /tmp/zookeeper/myid
     
-  handlers:
-    - name: restart postgres
-      service: name=postgresql state=restarted
+  - name: On zookeeper1 instance setup confiuration for Zookeeper cluster
+    when: "'zookeeper1' in group_names"
+    copy:
+      dest: "/home/ubuntu/Zookeeper_node/apache-zookeeper-3.8.0-bin/conf/zoo.cfg"
+      content: |
+        tickTime=2000
+        dataDir=/tmp/zookeeper
+        clientPort=2181
+        maxClientCnxns=60
+        initLimit=10
+        syncLimit=5
+        4lw.commands.whitelist=*
+        server.1=0.0.0.0:2888:3888
+        server.2={{zk_2_ip}}:2888:3888
+        server.3={{zk_3_ip}}:2888:3888
 
+  - name: On zookeeper2 instance create Zookeeper directory
+    when: "'zookeeper2' in group_names"
+    shell: mkdir /tmp/zookeeper && echo 2 >> /tmp/zookeeper/myid
+  - name: On zookeeper1 instance setup confiuration for Zookeeper cluster
+    when: "'zookeeper2' in group_names"
+    copy:
+      dest: "/home/ubuntu/Zookeeper_node/apache-zookeeper-3.8.0-bin/conf/zoo.cfg"
+      content: |
+        tickTime=2000
+        dataDir=/tmp/zookeeper
+        clientPort=2181
+        maxClientCnxns=60
+        initLimit=10
+        syncLimit=5
+        4lw.commands.whitelist=*
+        server.1={{zk_1_ip}}:2888:3888
+        server.2=0.0.0.0:2888:3888
+        server.3={{zk_3_ip}}:2888:3888
+        
+  - name: On zookeeper3 instance create Zookeeper directory
+    when: "'zookeeper3' in group_names"
+    shell: mkdir /tmp/zookeeper && echo 3 >> /tmp/zookeeper/myid
+
+  - name: On zookeeper3 instance setup confiuration for Zookeeper cluster
+    when: "'zookeeper3' in group_names"
+    copy:
+      dest: "/home/ubuntu/Zookeeper_node/apache-zookeeper-3.8.0-bin/conf/zoo.cfg"
+      content: |
+        tickTime=2000
+        dataDir=/tmp/zookeeper
+        clientPort=2181
+        maxClientCnxns=60
+        initLimit=10
+        syncLimit=5
+        4lw.commands.whitelist=*
+        server.1={{zk_1_ip}}:2888:3888
+        server.2={{zk_2_ip}}:2888:3888
+        server.3=0.0.0.0:2888:3888
+        
+  - name: Start Zookeeper server
+    command: /home/ubuntu/Zookeeper_node/apache-zookeeper-3.8.0-bin/bin/zkServer.sh start
+        
 ```
 
-No changes are required to the file.
+Provide the IP of zookeeper changes are required to the file.
 
 ### Ansible Commands
 
