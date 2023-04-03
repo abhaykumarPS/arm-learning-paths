@@ -367,144 +367,186 @@ PLAY RECAP *********************************************************************
 3.84.22.24                 : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
 
-## Connect to the database 
+## Configure three node Kafka cluster through Ansible
 
-Execute the steps below to try out PostgreSQL.
+Install the Kafka and the required dependencies. 
 
-1. Connect to the database using SSH to the public IP of the AWS EC2 instance. 
-
-```console
-ssh ubuntu@<public-IP-address>
-```
-
-2. Log in to postgres using the commands:
+Using a text editor, save the code below to in a file called `kafka_cluster.yaml`. This is the YAML file for the Ansible playbook. 
 
 ```console
-cd ~postgres/
-sudo su postgres -c psql
+- hosts: kafka1, kafka2, kafka3
+  become: True
+  vars:
+    - zk_1_ip: "3.134.244.225"
+    - zk_2_ip: "18.117.161.107"
+    - zk_3_ip: "3.17.129.114"
+  tasks:
+  - name: Update machines and install Java, Kafka
+    shell: |
+           apt update
+           apt install -y default-jdk
+           mkdir kafka_node
+           cd kafka_node/ && wget https://dlcdn.apache.org/kafka/3.2.3/kafka_2.13-3.2.3.tgz && tar -xzf kafka_2.13-3.2.3.tgz && cd kafka_2.13-3.2.3
+
+  - name: On kafka1 instance create log directory
+    when: "'kafka1' in group_names"
+    shell: mkdir /tmp/kafka-logs
+
+  - name: On kafka1 instance update broker id
+    when: "'kafka1' in group_names"
+    lineinfile:
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      regexp: '^(.*)broker.id(.*)$'
+      line: 'broker.id=1'
+      backrefs: yes
+
+  - name: On kafka1 instance uncomment listeners
+    when: "'kafka1' in group_names"
+    lineinfile:
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      regexp: '^(.*)#listeners=PLAINTEXT://:9092(.*)$'
+      line: 'listeners=PLAINTEXT://:9092'
+      backrefs: yes
+
+  - name: On kafka1 instance update zookeeper.connect
+    when: "'kafka1' in group_names"
+    lineinfile:
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      regexp: '^(.*)zookeeper.connect=localhost:2181(.*)$'
+      line: 'zookeeper.connect={{zk_1_ip}}:2181,{{zk_2_ip}}:2181,{{zk_3_ip}}:2181'
+      backrefs: yes
+
+  - name: On kafka2 instance create log directory
+    when: "'kafka2' in group_names"
+    shell: mkdir /tmp/kafka-logs
+
+  - name: On kafka2 instance update broker id
+    when: "'kafka2' in group_names"
+    lineinfile:
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      regexp: '^(.*)broker.id(.*)$'
+      line: 'broker.id=2'
+      backrefs: yes
+  - name: On kafka2 instance uncomment listeners
+    when: "'kafka2' in group_names"
+    lineinfile:
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      regexp: '^(.*)#listeners=PLAINTEXT://:9092(.*)$'
+      line: 'listeners=PLAINTEXT://:9092'
+      backrefs: yes
+
+  - name: On kafka2 instance update zookeeper.connect
+    when: "'kafka2' in group_names"
+    lineinfile:
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      regexp: '^(.*)zookeeper.connect=localhost:2181(.*)$'
+      line: 'zookeeper.connect={{zk_1_ip}}:2181,{{zk_2_ip}}:2181,{{zk_3_ip}}:2181'
+      backrefs: yes
+
+
+  - name: On kafka3 instance create log directory
+    when: "'kafka3' in group_names"
+    shell: mkdir /tmp/kafka-logs
+
+  - name: On kafka3 instance update broker id
+    when: "'kafka3' in group_names"
+    lineinfile:
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      regexp: '^(.*)broker.id(.*)$'
+      line: 'broker.id=3'
+      backrefs: yes
+
+  - name: On kafka3 instance uncomment listeners
+    when: "'kafka3' in group_names"
+    lineinfile:
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      regexp: '^(.*)#listeners=PLAINTEXT://:9092(.*)$'
+      line: 'listeners=PLAINTEXT://:9092'
+      backrefs: yes
+
+  - name: On kafka3 instance update zookeeper.connect
+    when: "'kafka3' in group_names"
+    lineinfile:
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      regexp: '^(.*)zookeeper.connect=localhost:2181(.*)$'
+      line: 'zookeeper.connect={{zk_1_ip}}:2181,{{zk_2_ip}}:2181,{{zk_3_ip}}:2181'
+      backrefs: yes
+
+  - name: Start kafka_server
+    command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-server-start.sh /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+
+        
 ```
 
-This will enter the PostgreSQL command prompt.
+Provide the IP of zookeeper changes are required to the file.
+
+After successfully setting up a 3 node Kafka cluster, we can verify it works by creating a topic and storing the events. Follow the steps below to create a topic, write some events into the topic, and then read the events.
+
+## Configure client through Ansible
+
+Install the Kafka and the required dependencies. 
+
+Using a text editor, save the code below to in a file called `client.yaml`. This is the YAML file for the Ansible playbook. 
 
 ```console
-psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1))
-Type "help" for help.
+- hosts: client1
+  become: true
+  vars:
+    - kf_1_ip: "18.221.58.152"
+    - kf_2_ip: "3.21.19.58"
+    - kf_3_ip: "18.117.95.223"
+  tasks:
 
-postgres=# 
+  - name: Update machines and install Java, Kafka
+    shell: |
+           apt update
+           apt install -y default-jdk
+           mkdir kafka_node
+           cd kafka_node/ && wget https://dlcdn.apache.org/kafka/3.2.3/kafka_2.13-3.2.3.tgz && tar -xzf kafka_2.13-3.2.3.tgz && cd kafka_2.13-3.2.3
+
+  - name: Create a topic
+    command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-topics.sh --create --topic test-topic --bootstrap-server {{kf_1_ip}}:9092,{{kf_2_ip}}:9092,{{kf_3_ip}}:9092 --replication-factor 3 --partitions 64
+
 ```
 
-3. Create a new database:
+## Describe the topic created:
+
+Run in the same client terminal where the topic was created.
 
 ```console
-create database testdb;
+
+./bin/kafka-topics.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092 --describe
+
 ```
+![describe_command (3)](https://user-images.githubusercontent.com/66300308/196909519-20eb720c-e43a-4eb7-abfa-405d4f931417.png)
 
-The output will be:
+## Run the producer client to write events into the created topic:
 
-```output
-CREATE DATABASE
-```
-
-4. List all databases: 
+Run in the same client terminal where the topic was created.
 
 ```console
- \l
+
+./bin/kafka-console-producer.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092
+
 ```
 
-The output will be:
+![producer_message](https://user-images.githubusercontent.com/66300308/196901191-bc9944cb-8bd9-4d0c-8096-00b1a5a23452.png)
 
-```output
-                                             List of databases
-   Name    |  Owner   | Encoding | Collate |  Ctype  | ICU Locale | Locale Provider |   Access privileges   
------------+----------+----------+---------+---------+------------+-----------------+-----------------------
- postgres  | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            | 
- template0 | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            | =c/postgres          +
-           |          |          |         |         |            |                 | postgres=CTc/postgres
- template1 | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            | =c/postgres          +
-           |          |          |         |         |            |                 | postgres=CTc/postgres
- testdb    | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            | 
-(4 rows)
-```
+## Run the consumer client to read all the events created:
 
-5. Switch to the new databases:
+Open a new terminal on the client machine to run the consumer client.
 
 ```console
- \c testdb;
+
+./bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092
+
 ```
+![consumer_message](https://user-images.githubusercontent.com/66300308/196900853-e8ca972c-6154-4a5c-92ac-3af92410ba95.png)
 
-The output confirms you have changed to the new database:
+Write a message into the producer client terminal and press enter. You should see the same message appear on consumer client terminal. 
 
-```output
-You are now connected to database "testdb" as user "postgres".
-```
+[<-- Return to Learning Path](/content/en/cloud/kafka/#sections)
 
-6. Create a new table in the database:
 
-```console
-CREATE TABLE company ( emp_name VARCHAR, emp_dpt VARCHAR);
-```
 
-The output will be:
 
-```output
-CREATE TABLE
-```
-
-7. Display the database tables: 
-
-```console
- \dt;
-```
-
-The tables will be printed:
-
-```console
-          List of relations
- Schema |  Name   | Type  |  Owner   
---------+---------+-------+----------
- public | company | table | postgres
-(1 row)
-```
-
-8. Insert data into the table:
-
-```console
-INSERT INTO company VALUES ('Herry', 'Development'), ('Tom', 'Testing'),('Ankit', 'Sales'),('Manoj', 'HR'),('Noy', 'Presales');
-```
-
-The output will be:
-
-```output
-INSERT 0 5
-```
-
-9. Print the contents of the table:
-
-```console
-select * from company;
-```
-
-The output will be:
-
-```output
- emp_name |   emp_dpt   
-----------+-------------
- Herry    | Development
- Tom      | Testing
- Ankit    | Sales
- Manoj    | HR
- Noy      | Presales
-(5 rows)
-```
-
-You have successfully installed PostgreSQL on an AWS EC2 instance running Graviton processors. 
-
-### Clean up resources
-
-Run `terraform destroy` to delete all resources created.
-
-```console
-terraform destroy
-```
-
-Continue the Learning Path to create a multi-node PostgreSQL deployment. 
