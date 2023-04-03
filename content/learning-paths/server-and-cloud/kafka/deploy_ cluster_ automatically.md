@@ -59,7 +59,7 @@ provider "aws" {
   ami           = "ami-0ca2eafa23bc3dd01"
   instance_type = "t4g.small"
   security_groups= [aws_security_group.Terraformsecurity500.name]
-  key_name = "kafka"
+  key_name = aws_key_pair.deployer.key_name  
   tags = {
     Name = "KAFKA_TEST"
   }
@@ -129,7 +129,7 @@ resource "aws_security_group" "Terraformsecurity500" {
 }
 resource "local_file" "inventory" {
     depends_on=[aws_instance.KAFKA_TEST]
-    filename = "./hosts"
+    filename = "/tmp/inventory"
     content = <<EOF
 [zookeeper1]
 ${aws_instance.KAFKA_TEST[0].public_ip}
@@ -153,8 +153,8 @@ ansible_user=ubuntu
 }
 
 resource "aws_key_pair" "deployer" {
-        key_name   = "kafka"
-        public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDffAvwWmMiVdXZ+uu0OoqjueUySSQwXYkYV3YZp6svQDYyPvIIkLQZB+qaFyBaoLIDVHriDDP6xg1Oc/YteNg93NjeZ6WIOx2a5ONbZCsmVXqC+vv/Z4xhjpDpnwUVB0jG+et7PLHCp7qUrCu60bFRuI4F4EXydFt4RWJHtxIf1OglfJITnAiC305KjTjwrOEsi/0L6qV98Y2abo8X3Fxrd0sf4uOLYiy53Ia2xEGvD8tmwKId2Kd8cymopCxe/F2kJISG0AydYdRzR2dx4xE9RmuZ8GtpGUSCs6hQgDNNQJ8INNQJ32gUHL2AAtGS0UkJvTsR1Hk6WyCccdeV1K+b/YBUQs2U74yivxMLYJ5ngzeERYWpLPAxOood506gjeZj1sxn8olJAQ0nfRuPYnub5P2F4IjZCQLu4S1M0YyivwlpzTL5X+ZboK2DT3uAVJ/Qs/OtvWbk74v+FHKIwGfhunIBfflJ8tLFt177w+LAcomydV+SbI/Y1a/DS5NPxMk= root@ip-172-31-38-39"
+        key_name   = "id_rsa"
+        public_key = file("~/.ssh/id_rsa.pub")
 }
 
 ```
