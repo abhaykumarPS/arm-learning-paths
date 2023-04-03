@@ -486,12 +486,12 @@ Install the Kafka and the required dependencies.
 Using a text editor, save the code below to in a file called `client.yaml`. This is the YAML file for the Ansible playbook. 
 
 ```console
-- hosts: client1
+- hosts: client
   become: true
   vars:
-    - kf_1_ip: "18.221.58.152"
-    - kf_2_ip: "3.21.19.58"
-    - kf_3_ip: "18.117.95.223"
+    - kf_1_ip: "kafka1_ip"
+    - kf_2_ip: "kafka2_ip"
+    - kf_3_ip: "kafka3_ip"
   tasks:
 
   - name: Update machines and install Java, Kafka
@@ -505,6 +505,7 @@ Using a text editor, save the code below to in a file called `client.yaml`. This
     command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-topics.sh --create --topic test-topic --bootstrap-server {{kf_1_ip}}:9092,{{kf_2_ip}}:9092,{{kf_3_ip}}:9092 --replication-factor 3 --partitions 64
 
 ```
+Replace kafka1_ip, kafka2_ip, kafka1_ip with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
 
 ## Describe the topic created:
 
