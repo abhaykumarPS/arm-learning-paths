@@ -243,9 +243,9 @@ Using a text editor, save the code below to in a file called `zookeeper_cluster.
 - hosts: zookeeper1, zookeeper2, zookeeper3
   become: True
   vars:
-    - zk_1_ip: "3.134.244.225"
-    - zk_2_ip: "18.117.161.107"
-    - zk_3_ip: "3.17.129.114"
+    - zk_1_ip: "zookeeper1_ip"
+    - zk_2_ip: "zookeeper2_ip"
+    - zk_3_ip: "zookeeper3_ip"
   tasks:
 
   - name: Update machines and install Java, Zookeeper
@@ -319,7 +319,7 @@ Using a text editor, save the code below to in a file called `zookeeper_cluster.
         
 ```
 
-Provide the IP of zookeeper changes are required to the file.
+Replace zookeeper1_ip, zookeeper2_ip, zookeeper3_ip with the IP of zookeeper1, zookeeper2 and zookeeper3 respectively generated in inventory file present at location `/tmp/inventory`.
 
 ### Ansible Commands
 
@@ -374,9 +374,9 @@ Using a text editor, save the code below to in a file called `kafka_cluster.yaml
 - hosts: kafka1, kafka2, kafka3
   become: True
   vars:
-    - zk_1_ip: "3.134.244.225"
-    - zk_2_ip: "18.117.161.107"
-    - zk_3_ip: "3.17.129.114"
+    - zk_1_ip: "zookeeper1_ip"
+    - zk_2_ip: "zookeeper2_ip"
+    - zk_3_ip: "zookeeper3_ip"
   tasks:
   - name: Update machines and install Java, Kafka
     shell: |
@@ -475,7 +475,7 @@ Using a text editor, save the code below to in a file called `kafka_cluster.yaml
         
 ```
 
-Provide the IP of zookeeper changes are required to the file.
+Replace zookeeper1_ip, zookeeper2_ip, zookeeper3_ip with the IP of zookeeper1, zookeeper2 and zookeeper3 respectively generated in inventory file present at location `/tmp/inventory`.
 
 After successfully setting up a 3 node Kafka cluster, we can verify it works by creating a topic and storing the events. Follow the steps below to create a topic, write some events into the topic, and then read the events.
 
