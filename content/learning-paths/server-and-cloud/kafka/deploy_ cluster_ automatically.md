@@ -169,10 +169,7 @@ Make the changes listed below in `main.tf` to match your account settings.
 The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
 {{% /notice %}}
 
-3. in the `local_file` section, change the `filename` to be the path to your current directory.
-
-The hosts file is automatically generated and does not need to be changed, change the path to the location of the hosts file.
-
+The inventory file is automatically generated and does not need to be changed.
 
 ## Terraform Commands
 
