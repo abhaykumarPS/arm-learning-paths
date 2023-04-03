@@ -54,14 +54,14 @@ provider "aws" {
   access_key  = "xxxxxxxxxxxxxxx"
   secret_key   = "xxxxxxxxxxxxxxx"
 }
-  resource "aws_instance" "ABHISHEK_KAFKA_TEST" {
+  resource "aws_instance" "KAFKA_TEST" {
   count         = "7"
   ami           = "ami-0ca2eafa23bc3dd01"
   instance_type = "t4g.small"
   security_groups= [aws_security_group.Terraformsecurity500.name]
   key_name = "kafka"
   tags = {
-    Name = "ABHISHEK_KAFKA_TEST"
+    Name = "KAFKA_TEST"
   }
 }
 resource "aws_default_vpc" "main" {
@@ -128,23 +128,23 @@ resource "aws_security_group" "Terraformsecurity500" {
   }
 }
 resource "local_file" "inventory" {
-    depends_on=[aws_instance.ABHISHEK_KAFKA_TEST]
+    depends_on=[aws_instance.KAFKA_TEST]
     filename = "./hosts"
     content = <<EOF
 [zookeeper1]
-${aws_instance.ABHISHEK_KAFKA_TEST[0].public_ip}
+${aws_instance.KAFKA_TEST[0].public_ip}
 [zookeeper2]
-${aws_instance.ABHISHEK_KAFKA_TEST[1].public_ip}
+${aws_instance.KAFKA_TEST[1].public_ip}
 [zookeeper3]
-${aws_instance.ABHISHEK_KAFKA_TEST[2].public_ip}
+${aws_instance.KAFKA_TEST[2].public_ip}
 [kafka1]
-${aws_instance.ABHISHEK_KAFKA_TEST[3].public_ip}
+${aws_instance.KAFKA_TEST[3].public_ip}
 [kafka2]
-${aws_instance.ABHISHEK_KAFKA_TEST[4].public_ip}
+${aws_instance.KAFKA_TEST[4].public_ip}
 [kafka3]
-${aws_instance.ABHISHEK_KAFKA_TEST[5].public_ip}
-[client1]
-${aws_instance.ABHISHEK_KAFKA_TEST[6].public_ip}
+${aws_instance.KAFKA_TEST[5].public_ip}
+[client]
+${aws_instance.KAFKA_TEST[6].public_ip}
 
 [all:vars]
 ansible_connection=ssh
