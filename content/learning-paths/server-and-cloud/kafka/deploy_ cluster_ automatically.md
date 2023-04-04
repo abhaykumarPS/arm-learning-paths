@@ -552,6 +552,17 @@ Replace kafka1_ip, kafka2_ip, kafka1_ip with the IP of kafka1, kafka2 and kafka3
 
 ## Describe the topic created:
 
+Please do the ssh on client instance using command below.
+
+```console
+
+ssh ubuntu@client_ip
+
+cd kafka_node/kafka_2.13-3.2.3
+
+```
+Replace the client_ip with the IP of client generated in inventory file present at location /tmp/inventory.
+
 Run in the same client terminal where the topic was created.
 
 ```console
