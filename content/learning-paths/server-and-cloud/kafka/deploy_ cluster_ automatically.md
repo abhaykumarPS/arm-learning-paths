@@ -477,6 +477,49 @@ Using a text editor, save the code below to in a file called `kafka_cluster.yaml
 
 Replace zookeeper1_ip, zookeeper2_ip, zookeeper3_ip with the IP of zookeeper1, zookeeper2 and zookeeper3 respectively generated in inventory file present at location `/tmp/inventory`.
 
+### Ansible Commands
+
+Substitute your private key name, and run the playbook using the  `ansible-playbook` command:
+
+```console
+ansible-playbook kafka_cluster.yaml -i /tmp/inventory
+```
+
+Answer `yes` when prompted for the SSH connection. 
+
+Deployment may take a few minutes. 
+
+The output should be similar to:
+
+```output
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+The authenticity of host '3.84.22.24 (3.84.22.24)' can't be established.
+ED25519 key fingerprint is SHA256:igz06Iz4YiilC08oFy8E5E78KCaJzYIthVpt1zhq9KM.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+ok: [3.84.22.24]
+
+TASK [Update the Machine & Install PostgreSQL] *********************************
+changed: [3.84.22.24]
+
+TASK [Update apt repo and cache on all Debian/Ubuntu boxes] ********************
+changed: [3.84.22.24]
+
+TASK [Install Python pip & Python package] *************************************
+changed: [3.84.22.24] => (item=python3-pip)
+
+TASK [Find out if PostgreSQL is initialized] ***********************************
+ok: [3.84.22.24]
+
+TASK [Start and enable services] ***********************************************
+ok: [3.84.22.24] => (item=postgresql)
+
+PLAY RECAP *********************************************************************
+3.84.22.24                 : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
+
 After successfully setting up a 3 node Kafka cluster, we can verify it works by creating a topic and storing the events. Follow the steps below to create a topic, write some events into the topic, and then read the events.
 
 ## Configure client through Ansible
@@ -544,7 +587,3 @@ Open a new terminal on the client machine to run the consumer client.
 Write a message into the producer client terminal and press enter. You should see the same message appear on consumer client terminal. 
 
 [<-- Return to Learning Path](/content/en/cloud/kafka/#sections)
-
-
-
-
