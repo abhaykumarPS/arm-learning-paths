@@ -563,7 +563,6 @@ cd kafka_node/kafka_2.13-3.2.3
 ```
 Replace the client_ip with the IP of client generated in inventory file present at location /tmp/inventory.
 
-Run in the same client terminal where the topic was created.
 
 ```console
 
