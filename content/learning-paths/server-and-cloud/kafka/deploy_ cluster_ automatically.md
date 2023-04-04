@@ -326,7 +326,7 @@ Replace zookeeper1_ip, zookeeper2_ip, zookeeper3_ip with the IP of zookeeper1, z
 Substitute your private key name, and run the playbook using the  `ansible-playbook` command:
 
 ```console
-ansible-playbook playbook.yaml -i hosts
+ansible-playbook zookeeper_cluster.yaml -i /tmp/inventory
 ```
 
 Answer `yes` when prompted for the SSH connection. 
