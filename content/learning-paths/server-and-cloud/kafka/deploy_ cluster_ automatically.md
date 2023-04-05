@@ -524,32 +524,95 @@ Deployment may take a few minutes.
 The output should be similar to:
 
 ```output
-PLAY [all] *********************************************************************
 
-TASK [Gathering Facts] *********************************************************
-The authenticity of host '3.84.22.24 (3.84.22.24)' can't be established.
-ED25519 key fingerprint is SHA256:igz06Iz4YiilC08oFy8E5E78KCaJzYIthVpt1zhq9KM.
+root@ip-172-31-38-39:/home/ubuntu/kf# ansible-playbook kafka_cluster.yaml -i /tmp/inventory
+
+PLAY [kafka1, kafka2, kafka3] ***********************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************
+The authenticity of host '3.19.64.64 (3.19.64.64)' can't be established.
+ED25519 key fingerprint is SHA256:3qKhnEt0Js8LL67OAcIDOsTx8qQGRlQlsJ8ZZX9Fz1E.
+This key is not known by any other names
+The authenticity of host '3.133.93.119 (3.133.93.119)' can't be established.
+ED25519 key fingerprint is SHA256:rI7qWf3fDGIkB+EqrPCa18maKeVck951WklPmeAQoXc.
+This key is not known by any other names
+The authenticity of host '18.222.0.36 (18.222.0.36)' can't be established.
+ED25519 key fingerprint is SHA256:+Gv6OFuOLlaIIiQRtRccpmA5vA0wC7SqriwyudB8K34.
 This key is not known by any other names
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-ok: [3.84.22.24]
+ok: [3.19.64.64]
+yes
+ok: [3.133.93.119]
+yes
+ok: [18.222.0.36]
 
-TASK [Update the Machine & Install PostgreSQL] *********************************
-changed: [3.84.22.24]
+TASK [Update machines and install Java, Kafka] ******************************************************************************************
+changed: [18.222.0.36]
+changed: [3.133.93.119]
+changed: [3.19.64.64]
 
-TASK [Update apt repo and cache on all Debian/Ubuntu boxes] ********************
-changed: [3.84.22.24]
+TASK [On kafka1 instance create log directory] ******************************************************************************************
+skipping: [3.133.93.119]
+skipping: [18.222.0.36]
+changed: [3.19.64.64]
 
-TASK [Install Python pip & Python package] *************************************
-changed: [3.84.22.24] => (item=python3-pip)
+TASK [On kafka1 instance update broker id] **********************************************************************************************
+skipping: [3.133.93.119]
+skipping: [18.222.0.36]
+changed: [3.19.64.64]
 
-TASK [Find out if PostgreSQL is initialized] ***********************************
-ok: [3.84.22.24]
+TASK [On kafka1 instance uncomment listeners] *******************************************************************************************
+skipping: [3.133.93.119]
+skipping: [18.222.0.36]
+changed: [3.19.64.64]
 
-TASK [Start and enable services] ***********************************************
-ok: [3.84.22.24] => (item=postgresql)
+TASK [On kafka1 instance update zookeeper.connect] **************************************************************************************
+skipping: [3.133.93.119]
+skipping: [18.222.0.36]
+changed: [3.19.64.64]
 
-PLAY RECAP *********************************************************************
-3.84.22.24                 : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+TASK [On kafka2 instance create log directory] ******************************************************************************************
+skipping: [3.19.64.64]
+skipping: [18.222.0.36]
+changed: [3.133.93.119]
+
+TASK [On kafka2 instance update broker id] **********************************************************************************************
+skipping: [3.19.64.64]
+skipping: [18.222.0.36]
+changed: [3.133.93.119]
+
+TASK [On kafka2 instance uncomment listeners] *******************************************************************************************
+skipping: [3.19.64.64]
+skipping: [18.222.0.36]
+changed: [3.133.93.119]
+
+TASK [On kafka2 instance update zookeeper.connect] **************************************************************************************
+skipping: [3.19.64.64]
+skipping: [18.222.0.36]
+changed: [3.133.93.119]
+
+TASK [On kafka3 instance create log directory] ******************************************************************************************
+skipping: [3.19.64.64]
+skipping: [3.133.93.119]
+changed: [18.222.0.36]
+
+TASK [On kafka3 instance update broker id] **********************************************************************************************
+skipping: [3.19.64.64]
+skipping: [3.133.93.119]
+changed: [18.222.0.36]
+
+TASK [On kafka3 instance uncomment listeners] *******************************************************************************************
+skipping: [3.19.64.64]
+skipping: [3.133.93.119]
+changed: [18.222.0.36]
+
+TASK [On kafka3 instance update zookeeper.connect] **************************************************************************************
+skipping: [3.19.64.64]
+skipping: [3.133.93.119]
+changed: [18.222.0.36]
+
+TASK [Start kafka_server] ***************************************************************************************************************
+ 
 ```
 
 After successfully setting up a 3 node Kafka cluster, we can verify it works by creating a topic and storing the events. Follow the steps below to create a topic, write some events into the topic, and then read the events.
