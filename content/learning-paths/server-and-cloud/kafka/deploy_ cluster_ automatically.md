@@ -334,6 +334,7 @@ Deployment may take a few minutes.
 The output should be similar to:
 
 ```output
+
 root@ip-172-31-38-39:/home/ubuntu/kf# ansible-playbook zookeeper_cluster.yaml -i /tmp/inventory
 
 PLAY [zookeeper1, zookeeper2, zookeeper3] ***********************************************************************************************
@@ -403,12 +404,14 @@ PLAY RECAP *********************************************************************
 Using a text editor, save the code below to in a file called **kafka_cluster.yaml** and install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
 
 ```console
+
 - hosts: kafka1, kafka2, kafka3
   become: True
   vars:
     - zk_1_ip: "zookeeper1_ip"
     - zk_2_ip: "zookeeper2_ip"
     - zk_3_ip: "zookeeper3_ip"
+    
   tasks:
   - name: Update machines and install Java, Kafka
     shell: |
@@ -456,6 +459,7 @@ Using a text editor, save the code below to in a file called **kafka_cluster.yam
       regexp: '^(.*)broker.id(.*)$'
       line: 'broker.id=2'
       backrefs: yes
+      
   - name: On kafka2 instance uncomment listeners
     when: "'kafka2' in group_names"
     lineinfile:
@@ -471,8 +475,7 @@ Using a text editor, save the code below to in a file called **kafka_cluster.yam
       regexp: '^(.*)zookeeper.connect=localhost:2181(.*)$'
       line: 'zookeeper.connect={{zk_1_ip}}:2181,{{zk_2_ip}}:2181,{{zk_3_ip}}:2181'
       backrefs: yes
-
-
+      
   - name: On kafka3 instance create log directory
     when: "'kafka3' in group_names"
     shell: mkdir /tmp/kafka-logs
@@ -503,7 +506,6 @@ Using a text editor, save the code below to in a file called **kafka_cluster.yam
 
   - name: Start kafka_server
     command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-server-start.sh /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
-
         
 ```
 
@@ -514,7 +516,9 @@ Replace `zookeeper1_ip`, `zookeeper2_ip`, `zookeeper3_ip` with the IP of zookeep
 Run the playbook using the  `ansible-playbook` command:
 
 ```console
+
 ansible-playbook kafka_cluster.yaml -i /tmp/inventory
+
 ```
 
 Answer `yes` when prompted for the SSH connection. 
@@ -622,6 +626,7 @@ After successfully setting up a 3 node Kafka cluster, we can verify it works by 
 Using a text editor, save the code below to in a file called **client.yaml** and install the Kafka and the required dependencies.This is the YAML file for the Ansible playbook. 
 
 ```console
+
 - hosts: client
   become: true
   vars:
@@ -694,6 +699,7 @@ ssh ubuntu@client_ip
 cd kafka_node/kafka_2.13-3.2.3
 
 ```
+
 The output should be similar to:
 
 ```console
@@ -721,17 +727,16 @@ To see these additional updates run: apt list --upgradable
 
 Last login: Wed Apr  5 09:38:31 2023 from 18.191.180.133
 
-
 ```
 
 Run the following command and replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location **/tmp/inventory**.
-
 
 ```console
 
 ./bin/kafka-topics.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092 --describe
 
 ```
+
 The output should be similar to:
 
 ```console
@@ -802,7 +807,7 @@ Topic: test-topic       TopicId: J_G3hNvpTjSXoQ4-gyPKYg PartitionCount: 64      
         Topic: test-topic       Partition: 61   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
         Topic: test-topic       Partition: 62   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
         Topic: test-topic       Partition: 63   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-
+        
 ```
 
 ## Run the producer client to write events into the created topic:
@@ -843,6 +848,7 @@ Run the following command and replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with
 ./bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092
 
 ```
+
 The output should be similar to:
 
 ```console
