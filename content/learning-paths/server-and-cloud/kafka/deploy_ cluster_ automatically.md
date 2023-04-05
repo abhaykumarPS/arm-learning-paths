@@ -235,9 +235,7 @@ Answer `yes` to the prompt to confirm you want to create AWS resources.
 
 ## Configure three node Zookeeper cluster through Ansible
 
-Install the Zookeeper and the required dependencies. 
-
-Using a text editor, save the code below to in a file called `zookeeper_cluster.yaml`. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below to in a file called `zookeeper_cluster.yaml`and install the Zookeeper and the required dependencies.  This is the YAML file for the Ansible playbook. 
 
 ```console
 - hosts: zookeeper1, zookeeper2, zookeeper3
@@ -319,11 +317,11 @@ Using a text editor, save the code below to in a file called `zookeeper_cluster.
         
 ```
 
-Replace zookeeper1_ip, zookeeper2_ip, zookeeper3_ip with the IP of zookeeper1, zookeeper2 and zookeeper3 respectively generated in inventory file present at location `/tmp/inventory`.
+Replace `zookeeper1_ip`, `zookeeper2_ip`, `zookeeper3_ip` with the IP of zookeeper1, zookeeper2 and zookeeper3 respectively generated in inventory file present at location `/tmp/inventory`.
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command:
+Run the playbook using the  `ansible-playbook` command:
 
 ```console
 ansible-playbook zookeeper_cluster.yaml -i /tmp/inventory
@@ -368,7 +366,7 @@ PLAY RECAP *********************************************************************
 
 Install the Kafka and the required dependencies. 
 
-Using a text editor, save the code below to in a file called `kafka_cluster.yaml`. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below to in a file called `kafka_cluster.yaml`and Install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
 
 ```console
 - hosts: kafka1, kafka2, kafka3
@@ -475,11 +473,11 @@ Using a text editor, save the code below to in a file called `kafka_cluster.yaml
         
 ```
 
-Replace zookeeper1_ip, zookeeper2_ip, zookeeper3_ip with the IP of zookeeper1, zookeeper2 and zookeeper3 respectively generated in inventory file present at location `/tmp/inventory`.
+Replace `zookeeper1_ip`, `zookeeper2_ip`, `zookeeper3_ip` with the IP of zookeeper1, zookeeper2 and zookeeper3 respectively generated in inventory file present at location `/tmp/inventory`.
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command:
+Run the playbook using the  `ansible-playbook` command:
 
 ```console
 ansible-playbook kafka_cluster.yaml -i /tmp/inventory
@@ -526,7 +524,7 @@ After successfully setting up a 3 node Kafka cluster, we can verify it works by 
 
 Install the Kafka and the required dependencies. 
 
-Using a text editor, save the code below to in a file called `client.yaml`. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below to in a file called `client.yaml` and install the Kafka and the required dependencies.This is the YAML file for the Ansible playbook. 
 
 ```console
 - hosts: client
@@ -548,11 +546,11 @@ Using a text editor, save the code below to in a file called `client.yaml`. This
     command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-topics.sh --create --topic test-topic --bootstrap-server {{kf_1_ip}}:9092,{{kf_2_ip}}:9092,{{kf_3_ip}}:9092 --replication-factor 3 --partitions 64
 
 ```
-Replace kafka1_ip, kafka2_ip, kafka1_ip with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
+Replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
 
 ## Describe the topic created:
 
-Please do the ssh on client instance using command below.
+Do the ssh on client instance using following command.
 
 ```console
 
@@ -561,7 +559,7 @@ ssh ubuntu@client_ip
 cd kafka_node/kafka_2.13-3.2.3
 
 ```
-Replace the client_ip with the IP of client generated in inventory file present at location /tmp/inventory.
+Replace the `client_ip` with the IP of client generated in inventory file present at location `/tmp/inventory`.
 
 
 ```console
@@ -573,7 +571,7 @@ Replace the client_ip with the IP of client generated in inventory file present 
 
 ## Run the producer client to write events into the created topic:
 
-Run in the same client terminal where the topic was created.
+Run the following command in the same client terminal where the topic was created.
 
 ```console
 
@@ -585,7 +583,16 @@ Run in the same client terminal where the topic was created.
 
 ## Run the consumer client to read all the events created:
 
-Open a new terminal on the client machine to run the consumer client.
+Open a new terminal on the client machine using following command.
+
+```console
+
+ssh ubuntu@client_ip
+
+cd kafka_node/kafka_2.13-3.2.3
+
+```
+Run the following command on the new terminal of the client machine to run the consumer client.
 
 ```console
 
@@ -596,4 +603,3 @@ Open a new terminal on the client machine to run the consumer client.
 
 Write a message into the producer client terminal and press enter. You should see the same message appear on consumer client terminal. 
 
-[<-- Return to Learning Path](/content/en/cloud/kafka/#sections)
