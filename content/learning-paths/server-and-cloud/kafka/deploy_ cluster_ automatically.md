@@ -334,32 +334,68 @@ Deployment may take a few minutes.
 The output should be similar to:
 
 ```output
-PLAY [all] *********************************************************************
+root@ip-172-31-38-39:/home/ubuntu/kf# ansible-playbook zookeeper_cluster.yaml -i /tmp/inventory
 
-TASK [Gathering Facts] *********************************************************
-The authenticity of host '3.84.22.24 (3.84.22.24)' can't be established.
-ED25519 key fingerprint is SHA256:igz06Iz4YiilC08oFy8E5E78KCaJzYIthVpt1zhq9KM.
+PLAY [zookeeper1, zookeeper2, zookeeper3] ***********************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************
+The authenticity of host '18.222.137.38 (18.222.137.38)' can't be established.
+ED25519 key fingerprint is SHA256:078u3zYJtAMqmZTWI1qGLNTdlp/iDtqgxnrUV7NLjNA.
 This key is not known by any other names
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-ok: [3.84.22.24]
+The authenticity of host '18.117.144.56 (18.117.144.56)' can't be established.
+ED25519 key fingerprint is SHA256:pdmVviF1LTQOrM5t0Pp3yrsL+M3DsJdbYjGtmb5h44c.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? ok: [3.140.201.79]
+yes
+ok: [18.222.137.38]
+yes
+ok: [18.117.144.56]
 
-TASK [Update the Machine & Install PostgreSQL] *********************************
-changed: [3.84.22.24]
+TASK [Update machines and install Java, Zookeeper] **************************************************************************************
+changed: [18.222.137.38]
+changed: [3.140.201.79]
+changed: [18.117.144.56]
 
-TASK [Update apt repo and cache on all Debian/Ubuntu boxes] ********************
-changed: [3.84.22.24]
+TASK [On zookeeper1 instance create Zookeeper directory] ********************************************************************************
+skipping: [18.117.144.56]
+skipping: [3.140.201.79]
+changed: [18.222.137.38]
 
-TASK [Install Python pip & Python package] *************************************
-changed: [3.84.22.24] => (item=python3-pip)
+TASK [On zookeeper1 instance setup confiuration for Zookeeper cluster] ******************************************************************
+skipping: [18.117.144.56]
+skipping: [3.140.201.79]
+changed: [18.222.137.38]
 
-TASK [Find out if PostgreSQL is initialized] ***********************************
-ok: [3.84.22.24]
+TASK [On zookeeper2 instance create Zookeeper directory] ********************************************************************************
+skipping: [18.222.137.38]
+skipping: [3.140.201.79]
+changed: [18.117.144.56]
 
-TASK [Start and enable services] ***********************************************
-ok: [3.84.22.24] => (item=postgresql)
+TASK [On zookeeper1 instance setup confiuration for Zookeeper cluster] ******************************************************************
+skipping: [18.222.137.38]
+skipping: [3.140.201.79]
+changed: [18.117.144.56]
 
-PLAY RECAP *********************************************************************
-3.84.22.24                 : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+TASK [On zookeeper3 instance create Zookeeper directory] ********************************************************************************
+skipping: [18.222.137.38]
+skipping: [18.117.144.56]
+changed: [3.140.201.79]
+
+TASK [On zookeeper3 instance setup confiuration for Zookeeper cluster] ******************************************************************
+skipping: [18.222.137.38]
+skipping: [18.117.144.56]
+changed: [3.140.201.79]
+
+TASK [Start Zookeeper server] ***********************************************************************************************************
+changed: [18.222.137.38]
+changed: [18.117.144.56]
+changed: [3.140.201.79]
+
+PLAY RECAP ******************************************************************************************************************************
+18.117.144.56              : ok=5    changed=4    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0
+18.222.137.38              : ok=5    changed=4    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0
+3.140.201.79               : ok=5    changed=4    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0
+  
 ```
 
 ## Configure three node Kafka cluster through Ansible
