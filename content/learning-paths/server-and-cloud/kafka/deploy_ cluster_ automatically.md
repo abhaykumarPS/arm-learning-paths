@@ -364,9 +364,7 @@ PLAY RECAP *********************************************************************
 
 ## Configure three node Kafka cluster through Ansible
 
-Install the Kafka and the required dependencies. 
-
-Using a text editor, save the code below to in a file called `kafka_cluster.yaml`and Install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below to in a file called `kafka_cluster.yaml`and install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
 
 ```console
 - hosts: kafka1, kafka2, kafka3
@@ -522,8 +520,6 @@ After successfully setting up a 3 node Kafka cluster, we can verify it works by 
 
 ## Configure client through Ansible
 
-Install the Kafka and the required dependencies. 
-
 Using a text editor, save the code below to in a file called `client.yaml` and install the Kafka and the required dependencies.This is the YAML file for the Ansible playbook. 
 
 ```console
@@ -559,7 +555,7 @@ ssh ubuntu@client_ip
 cd kafka_node/kafka_2.13-3.2.3
 
 ```
-Replace the `client_ip` with the IP of client generated in inventory file present at location `/tmp/inventory`.
+Replace the `client_ip` with the IP of client generated in inventory file present at location `/tmp/inventory` and run the following command.
 
 
 ```console
@@ -602,4 +598,3 @@ Run the following command on the new terminal of the client machine to run the c
 ![consumer_message](https://user-images.githubusercontent.com/66300308/196900853-e8ca972c-6154-4a5c-92ac-3af92410ba95.png)
 
 Write a message into the producer client terminal and press enter. You should see the same message appear on consumer client terminal. 
-
