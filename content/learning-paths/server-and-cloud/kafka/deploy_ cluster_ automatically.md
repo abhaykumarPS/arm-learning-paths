@@ -680,7 +680,7 @@ PLAY RECAP *********************************************************************
 
 ## Describe the topic created:
 
-Do the ssh on client instance using following command.
+Do the ssh on client instance using following command. Replace the `client_ip` with the IP of client generated in inventory file present at location **/tmp/inventory**.
 
 ```console
 
@@ -719,7 +719,7 @@ Last login: Wed Apr  5 09:38:31 2023 from 18.191.180.133
 
 ```
 
-Replace the `client_ip` with the IP of client generated in inventory file present at location **/tmp/inventory** and run the following command.
+Run the following command and replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location **/tmp/inventory**.
 
 
 ```console
@@ -802,7 +802,7 @@ Topic: test-topic       TopicId: J_G3hNvpTjSXoQ4-gyPKYg PartitionCount: 64      
 
 ## Run the producer client to write events into the created topic:
 
-Run the following command in the same client terminal where the topic was created.
+Run the following command and replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location **/tmp/inventory** in the same client terminal where the topic was created.
 
 ```console
 
@@ -831,7 +831,7 @@ ssh ubuntu@client_ip
 cd kafka_node/kafka_2.13-3.2.3
 
 ```
-Run the following command on the new terminal of the client machine to run the consumer client.
+Run the following command and replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location **/tmp/inventory** on the new terminal of the client machine to run the consumer client.
 
 ```console
 
