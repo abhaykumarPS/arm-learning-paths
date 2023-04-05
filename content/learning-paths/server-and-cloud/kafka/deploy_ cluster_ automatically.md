@@ -815,7 +815,15 @@ Run the following command in the same client terminal where the topic was create
 
 ```
 
-![producer_message](https://user-images.githubusercontent.com/66300308/196901191-bc9944cb-8bd9-4d0c-8096-00b1a5a23452.png)
+The output should be similar to:
+
+```console
+
+ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-console-producer.sh --topic test-topic --bootstrap-server 3.19.64.64:9092,3.133.93.119:9092,18.222.0.36:9092
+>This is the first message written on producer
+>
+
+```
 
 ## Run the consumer client to read all the events created:
 
@@ -835,6 +843,13 @@ Run the following command on the new terminal of the client machine to run the c
 ./bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092
 
 ```
-![consumer_message](https://user-images.githubusercontent.com/66300308/196900853-e8ca972c-6154-4a5c-92ac-3af92410ba95.png)
+The output should be similar to:
+
+```console
+
+ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server 3.19.64.64:9092,3.133.93.119:9092,18.222.0.36:9092
+This is the first message written on producer
+
+```
 
 Write a message into the producer client terminal and press enter. You should see the same message appear on consumer client terminal. 
