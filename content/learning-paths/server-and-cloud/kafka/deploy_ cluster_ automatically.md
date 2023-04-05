@@ -544,6 +544,51 @@ Using a text editor, save the code below to in a file called `client.yaml` and i
 ```
 Replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
 
+### Ansible Commands
+
+Run the playbook using the `ansible-playbook` command:
+
+```console
+
+ansible-playbook client.yaml -i /tmp/inventory
+
+```
+
+Answer `yes` when prompted for the SSH connection. 
+
+Deployment may take a few minutes. 
+
+The output should be similar to:
+
+```output
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+The authenticity of host '3.84.22.24 (3.84.22.24)' can't be established.
+ED25519 key fingerprint is SHA256:igz06Iz4YiilC08oFy8E5E78KCaJzYIthVpt1zhq9KM.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+ok: [3.84.22.24]
+
+TASK [Update the Machine & Install PostgreSQL] *********************************
+changed: [3.84.22.24]
+
+TASK [Update apt repo and cache on all Debian/Ubuntu boxes] ********************
+changed: [3.84.22.24]
+
+TASK [Install Python pip & Python package] *************************************
+changed: [3.84.22.24] => (item=python3-pip)
+
+TASK [Find out if PostgreSQL is initialized] ***********************************
+ok: [3.84.22.24]
+
+TASK [Start and enable services] ***********************************************
+ok: [3.84.22.24] => (item=postgresql)
+
+PLAY RECAP *********************************************************************
+3.84.22.24                 : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
+
 ## Describe the topic created:
 
 Do the ssh on client instance using following command.
