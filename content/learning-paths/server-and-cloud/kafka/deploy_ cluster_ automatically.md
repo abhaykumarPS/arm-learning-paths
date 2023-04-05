@@ -633,19 +633,20 @@ Using a text editor, save the code below to in a file called **client.yaml** and
     - kf_1_ip: "kafka1_ip"
     - kf_2_ip: "kafka2_ip"
     - kf_3_ip: "kafka3_ip"
+    
   tasks:
-
   - name: Update machines and install Java, Kafka
     shell: |
            apt update
            apt install -y default-jdk
            mkdir kafka_node
            cd kafka_node/ && wget https://dlcdn.apache.org/kafka/3.2.3/kafka_2.13-3.2.3.tgz && tar -xzf kafka_2.13-3.2.3.tgz && cd kafka_2.13-3.2.3
-
+           
   - name: Create a topic
     command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-topics.sh --create --topic test-topic --bootstrap-server {{kf_1_ip}}:9092,{{kf_2_ip}}:9092,{{kf_3_ip}}:9092 --replication-factor 3 --partitions 64
 
 ```
+
 Replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location **/tmp/inventory**.
 
 ### Ansible Commands
