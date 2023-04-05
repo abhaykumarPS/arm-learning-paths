@@ -242,8 +242,8 @@ Using a text editor, save the code below to in a file called **zookeeper_cluster
     - zk_1_ip: "zookeeper1_ip"
     - zk_2_ip: "zookeeper2_ip"
     - zk_3_ip: "zookeeper3_ip"
+    
   tasks:
-
   - name: Update machines and install Java, Zookeeper
     shell: |
            apt update
@@ -274,6 +274,7 @@ Using a text editor, save the code below to in a file called **zookeeper_cluster
   - name: On zookeeper2 instance create Zookeeper directory
     when: "'zookeeper2' in group_names"
     shell: mkdir /tmp/zookeeper && echo 2 >> /tmp/zookeeper/myid
+    
   - name: On zookeeper1 instance setup confiuration for Zookeeper cluster
     when: "'zookeeper2' in group_names"
     copy:
@@ -293,7 +294,7 @@ Using a text editor, save the code below to in a file called **zookeeper_cluster
   - name: On zookeeper3 instance create Zookeeper directory
     when: "'zookeeper3' in group_names"
     shell: mkdir /tmp/zookeeper && echo 3 >> /tmp/zookeeper/myid
-
+    
   - name: On zookeeper3 instance setup confiuration for Zookeeper cluster
     when: "'zookeeper3' in group_names"
     copy:
@@ -479,7 +480,7 @@ Using a text editor, save the code below to in a file called **kafka_cluster.yam
   - name: On kafka3 instance create log directory
     when: "'kafka3' in group_names"
     shell: mkdir /tmp/kafka-logs
-
+    
   - name: On kafka3 instance update broker id
     when: "'kafka3' in group_names"
     lineinfile:
@@ -495,7 +496,7 @@ Using a text editor, save the code below to in a file called **kafka_cluster.yam
       regexp: '^(.*)#listeners=PLAINTEXT://:9092(.*)$'
       line: 'listeners=PLAINTEXT://:9092'
       backrefs: yes
-
+      
   - name: On kafka3 instance update zookeeper.connect
     when: "'kafka3' in group_names"
     lineinfile:
@@ -503,7 +504,7 @@ Using a text editor, save the code below to in a file called **kafka_cluster.yam
       regexp: '^(.*)zookeeper.connect=localhost:2181(.*)$'
       line: 'zookeeper.connect={{zk_1_ip}}:2181,{{zk_2_ip}}:2181,{{zk_3_ip}}:2181'
       backrefs: yes
-
+      
   - name: Start kafka_server
     command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-server-start.sh /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
         
