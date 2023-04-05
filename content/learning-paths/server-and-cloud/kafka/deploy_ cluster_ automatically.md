@@ -694,6 +694,36 @@ ssh ubuntu@client_ip
 cd kafka_node/kafka_2.13-3.2.3
 
 ```
+The output should be similar to:
+
+```console
+
+root@ip-172-31-38-39:/home/ubuntu/kf# ssh ubuntu@18.216.149.104
+Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.15.0-1014-aws aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+128 updates can be applied immediately.
+75 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Last login: Wed Apr  5 09:38:31 2023 from 18.191.180.133
+
+
+```
+
 Replace the `client_ip` with the IP of client generated in inventory file present at location `/tmp/inventory` and run the following command.
 
 
@@ -702,7 +732,78 @@ Replace the `client_ip` with the IP of client generated in inventory file presen
 ./bin/kafka-topics.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092 --describe
 
 ```
-![describe_command (3)](https://user-images.githubusercontent.com/66300308/196909519-20eb720c-e43a-4eb7-abfa-405d4f931417.png)
+The output should be similar to:
+
+```console
+
+ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-topics.sh --topic test-topic --bootstrap-server 3.19.64.64:9092,3.133.93.119:9092,18.222.0.36:9092 --describe
+Topic: test-topic       TopicId: J_G3hNvpTjSXoQ4-gyPKYg PartitionCount: 64      ReplicationFactor: 3    Configs: segment.bytes=1073741824
+        Topic: test-topic       Partition: 0    Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: test-topic       Partition: 1    Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 2    Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 3    Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
+        Topic: test-topic       Partition: 4    Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
+        Topic: test-topic       Partition: 5    Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
+        Topic: test-topic       Partition: 6    Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: test-topic       Partition: 7    Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 8    Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 9    Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
+        Topic: test-topic       Partition: 10   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
+        Topic: test-topic       Partition: 11   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
+        Topic: test-topic       Partition: 12   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: test-topic       Partition: 13   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 14   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 15   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
+        Topic: test-topic       Partition: 16   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
+        Topic: test-topic       Partition: 17   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
+        Topic: test-topic       Partition: 18   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: test-topic       Partition: 19   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 20   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 21   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
+        Topic: test-topic       Partition: 22   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
+        Topic: test-topic       Partition: 23   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
+        Topic: test-topic       Partition: 24   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: test-topic       Partition: 25   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 26   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 27   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
+        Topic: test-topic       Partition: 28   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
+        Topic: test-topic       Partition: 29   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
+        Topic: test-topic       Partition: 30   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: test-topic       Partition: 31   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 32   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 33   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
+        Topic: test-topic       Partition: 34   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
+        Topic: test-topic       Partition: 35   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
+        Topic: test-topic       Partition: 36   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: test-topic       Partition: 37   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 38   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 39   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
+        Topic: test-topic       Partition: 40   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
+        Topic: test-topic       Partition: 41   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
+        Topic: test-topic       Partition: 42   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: test-topic       Partition: 43   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 44   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 45   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
+        Topic: test-topic       Partition: 46   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
+        Topic: test-topic       Partition: 47   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
+        Topic: test-topic       Partition: 48   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: test-topic       Partition: 49   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 50   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 51   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
+        Topic: test-topic       Partition: 52   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
+        Topic: test-topic       Partition: 53   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
+        Topic: test-topic       Partition: 54   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: test-topic       Partition: 55   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 56   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 57   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
+        Topic: test-topic       Partition: 58   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
+        Topic: test-topic       Partition: 59   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
+        Topic: test-topic       Partition: 60   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: test-topic       Partition: 61   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 62   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 63   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
+
+```
 
 ## Run the producer client to write events into the created topic:
 
