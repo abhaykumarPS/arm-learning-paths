@@ -54,26 +54,28 @@ provider "aws" {
   access_key  = "xxxxxxxxxxxxxxx"
   secret_key   = "xxxxxxxxxxxxxxx"
 }
-  resource "aws_instance" "KAFKA_TEST" {
-  count         = "7"
-  ami           = "ami-0ca2eafa23bc3dd01"
-  instance_type = "t4g.small"
-  security_groups= [aws_security_group.Terraformsecurity500.name]
-  key_name = aws_key_pair.deployer.key_name  
-  tags = {
-    Name = "KAFKA_TEST"
+
+resource "aws_instance" "KAFKA_TEST" {
+count         = "7"
+ami           = "ami-0ca2eafa23bc3dd01"
+instance_type = "t4g.small"
+security_groups= [aws_security_group.Terraformsecurity500.name]
+key_name = aws_key_pair.deployer.key_name  
+tags = {
+  Name = "KAFKA_TEST"
   }
 }
+
 resource "aws_default_vpc" "main" {
   tags = {
     Name = "main"
   }
 }
+
 resource "aws_security_group" "Terraformsecurity500" {
   name        = "Terraformsecurity500"
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_default_vpc.main.id
-
   ingress {
     description      = "TLS from VPC"
     from_port        = 2181
@@ -81,8 +83,6 @@ resource "aws_security_group" "Terraformsecurity500" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
 }
-
-
   ingress {
     description      = "TLS from VPC"
     from_port        = 9092
@@ -90,8 +90,6 @@ resource "aws_security_group" "Terraformsecurity500" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
 }
-
-
   ingress {
     description      = "TLS from VPC"
     from_port        = 2888
@@ -99,8 +97,6 @@ resource "aws_security_group" "Terraformsecurity500" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
 }
-
-
   ingress {
     description      = "TLS from VPC"
     from_port        = 3888
@@ -108,7 +104,6 @@ resource "aws_security_group" "Terraformsecurity500" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
 }
-
   ingress {
     description      = "TLS from VPC"
     from_port        = 22
@@ -122,11 +117,11 @@ resource "aws_security_group" "Terraformsecurity500" {
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
   }
-
   tags = {
     Name = "Terraformsecurity500"
   }
 }
+
 resource "local_file" "inventory" {
     depends_on=[aws_instance.KAFKA_TEST]
     filename = "/tmp/inventory"
@@ -145,7 +140,6 @@ ${aws_instance.KAFKA_TEST[4].public_ip}
 ${aws_instance.KAFKA_TEST[5].public_ip}
 [client]
 ${aws_instance.KAFKA_TEST[6].public_ip}
-
 [all:vars]
 ansible_connection=ssh
 ansible_user=ubuntu
@@ -180,12 +174,15 @@ Use Terraform to deploy the **main.tf** file.
 Run `terraform init` to initialize the Terraform deployment. This command downloads the dependencies required for AWS.
 
 ```console
+
 terraform init
+
 ```
     
 The output should be similar to:
 
 ```output
+
 root@ip-172-31-38-39:/home/ubuntu/kf# terraform init
 
 Initializing the backend...
@@ -205,6 +202,7 @@ should now work.
 If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
+
 ```
 
 ### Create a Terraform execution plan
@@ -212,7 +210,9 @@ commands will detect it and remind you to do so if necessary.
 Run `terraform plan` to create an execution plan.
 
 ```console
+
 terraform plan
+
 ```
 
 A long output of resources to be created will be printed. 
@@ -222,7 +222,9 @@ A long output of resources to be created will be printed.
 Run `terraform apply` to apply the execution plan and create all AWS resources: 
 
 ```console
+
 terraform apply
+
 ```      
 
 Answer `yes` to the prompt to confirm you want to create AWS resources. 
@@ -233,6 +235,7 @@ Answer `yes` to the prompt to confirm you want to create AWS resources.
 Using a text editor, save the code below to in a file called **zookeeper_cluster.yaml** and install the Zookeeper and the required dependencies.  This is the YAML file for the Ansible playbook. 
 
 ```console
+
 - hosts: zookeeper1, zookeeper2, zookeeper3
   become: True
   vars:
@@ -319,7 +322,9 @@ Replace `zookeeper1_ip`, `zookeeper2_ip`, `zookeeper3_ip` with the IP of zookeep
 Run the playbook using the  `ansible-playbook` command:
 
 ```console
+
 ansible-playbook zookeeper_cluster.yaml -i /tmp/inventory
+
 ```
 
 Answer `yes` when prompted for the SSH connection. 
