@@ -8,7 +8,7 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-##  Deploy seven instances(three for Zookeeper cluster, three for Kafka cluster and one for Client) 
+##  Deploy Cluster Automatically 
 
 You can deploy three node Zookeeper cluster, three node Kafka cluster and one client on AWS Graviton processors using Terraform and Ansible. 
  
