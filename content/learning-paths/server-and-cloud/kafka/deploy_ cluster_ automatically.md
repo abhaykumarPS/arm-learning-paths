@@ -186,20 +186,15 @@ terraform init
 The output should be similar to:
 
 ```output
+root@ip-172-31-38-39:/home/ubuntu/kf# terraform init
+
 Initializing the backend...
 
 Initializing provider plugins...
-- Finding latest version of hashicorp/local...
-- Finding latest version of hashicorp/aws...
-- Installing hashicorp/local v2.4.0...
-- Installed hashicorp/local v2.4.0 (signed by HashiCorp)
-- Installing hashicorp/aws v4.58.0...
-- Installed hashicorp/aws v4.58.0 (signed by HashiCorp)
-
-Terraform has created a lock file .terraform.lock.hcl to record the provider
-selections it made above. Include this file in your version control repository
-so that Terraform can guarantee to make the same selections by default when
-you run "terraform init" in the future.
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Reusing previous version of hashicorp/local from the dependency lock file
+- Using previously-installed hashicorp/aws v4.61.0
+- Using previously-installed hashicorp/local v2.4.0
 
 Terraform has been successfully initialized!
 
