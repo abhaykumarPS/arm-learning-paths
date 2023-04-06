@@ -47,7 +47,6 @@ To generate and configure the Access key ID and Secret access key, follow this [
 Using a text editor, save the code below to in a file called `main.tf`
 
 Scroll down to see the information you need to change in `main.tf`
-
 ```console
 provider "aws" {
   region = "us-east-2"
