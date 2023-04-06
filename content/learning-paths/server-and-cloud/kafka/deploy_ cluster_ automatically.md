@@ -59,7 +59,7 @@ resource "aws_instance" "KAFKA_TEST" {
 count         = "7"
 ami           = "ami-0ca2eafa23bc3dd01"
 instance_type = "t4g.small"
-security_groups= [aws_security_group.Terraformsecurity500.name]
+security_groups= [aws_security_group.Terraformsecurity.name]
 key_name = aws_key_pair.deployer.key_name  
 tags = {
   Name = "KAFKA_TEST"
@@ -72,8 +72,8 @@ resource "aws_default_vpc" "main" {
   }
 }
 
-resource "aws_security_group" "Terraformsecurity500" {
-  name        = "Terraformsecurity500"
+resource "aws_security_group" "Terraformsecurity" {
+  name        = "Terraformsecurity"
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_default_vpc.main.id
   ingress {
@@ -118,7 +118,7 @@ resource "aws_security_group" "Terraformsecurity500" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "Terraformsecurity500"
+    Name = "Terraformsecurity"
   }
 }
 
