@@ -704,7 +704,7 @@ cd kafka_node/kafka_2.13-3.2.3
 
 The output should be similar to:
 
-```console
+```output
 
 root@ip-172-31-38-39:/home/ubuntu/kf# ssh ubuntu@18.216.149.104
 Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.15.0-1014-aws aarch64)
