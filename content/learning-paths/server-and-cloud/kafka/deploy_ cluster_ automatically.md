@@ -402,7 +402,7 @@ PLAY RECAP *********************************************************************
 
 ## Configure three node Kafka cluster through Ansible
 
-Using a text editor, save the code below to in a file called **kafka_cluster.yaml** and install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below to in a file called `kafka_cluster.yaml` and install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
 
 ```console
 
