@@ -225,7 +225,17 @@ Run `terraform apply` to apply the execution plan and create all AWS resources:
 
 terraform apply
 
-```      
+```
+The output should be similar to:
+
+```output
+
+local_file.inventory: Creating...
+local_file.inventory: Creation complete after 0s [id=034d680c1738cdf217a5ad90885e6ec262470127]
+
+Apply complete! Resources: 11 added, 0 changed, 0 destroyed.
+
+```
 
 Answer `yes` to the prompt to confirm you want to create AWS resources. 
 
