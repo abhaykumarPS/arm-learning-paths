@@ -44,7 +44,7 @@ To generate and configure the Access key ID and Secret access key, follow this [
 
 ## Create seven AWS EC2 instance using Terraform
 
-Using a text editor, save the code below to in a file called `main.tf`
+Using a text editor, save the code below in a file called `main.tf`
 
 Scroll down to see the information you need to change in `main.tf`
 
@@ -232,7 +232,7 @@ Answer `yes` to the prompt to confirm you want to create AWS resources.
 
 ## Configure three node Zookeeper cluster through Ansible
 
-Using a text editor, save the code below to in a file called `zookeeper_cluster.yaml` and install the Zookeeper and the required dependencies.  This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below in a file called `zookeeper_cluster.yaml` and install the Zookeeper and the required dependencies.  This is the YAML file for the Ansible playbook. 
 
 ```console
 
@@ -402,7 +402,7 @@ PLAY RECAP *********************************************************************
 
 ## Configure three node Kafka cluster through Ansible
 
-Using a text editor, save the code below to in a file called `kafka_cluster.yaml` and install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below in a file called `kafka_cluster.yaml` and install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
 
 ```console
 
@@ -624,7 +624,7 @@ After successfully setting up a 3 node Kafka cluster, we can verify it works by 
 
 ## Configure client through Ansible
 
-Using a text editor, save the code below to in a file called `client.yaml` and install the Kafka and the required dependencies.This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below in a file called `client.yaml` and install the Kafka and the required dependencies.This is the YAML file for the Ansible playbook. 
 
 ```console
 
