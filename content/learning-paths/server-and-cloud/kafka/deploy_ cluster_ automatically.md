@@ -741,7 +741,7 @@ Run the following command and replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with
 
 The output should be similar to:
 
-```console
+```output
 
 ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-topics.sh --topic test-topic --bootstrap-server 3.19.64.64:9092,3.133.93.119:9092,18.222.0.36:9092 --describe
 Topic: test-topic       TopicId: J_G3hNvpTjSXoQ4-gyPKYg PartitionCount: 64      ReplicationFactor: 3    Configs: segment.bytes=1073741824
@@ -824,7 +824,7 @@ Run the following command and replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with
 
 The output should be similar to:
 
-```console
+```output
 
 ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-console-producer.sh --topic test-topic --bootstrap-server 3.19.64.64:9092,3.133.93.119:9092,18.222.0.36:9092
 >This is the first message written on producer
@@ -853,7 +853,7 @@ Run the following command and replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with
 
 The output should be similar to:
 
-```console
+```output
 
 ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server 3.19.64.64:9092,3.133.93.119:9092,18.222.0.36:9092
 This is the first message written on producer
