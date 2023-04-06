@@ -44,7 +44,7 @@ To generate and configure the Access key ID and Secret access key, follow this [
 
 ## Create seven AWS EC2 instance using Terraform
 
-Using a text editor, save the code below in a file called `main.tf`
+Using a text editor, save the code below to in a file called `main.tf`
 
 Scroll down to see the information you need to change in `main.tf`
 
@@ -232,7 +232,7 @@ Answer `yes` to the prompt to confirm you want to create AWS resources.
 
 ## Configure three node Zookeeper cluster through Ansible
 
-Using a text editor, save the code below in a file called `zookeeper_cluster.yaml` and install the Zookeeper and the required dependencies.  This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below to in a file called `zookeeper_cluster.yaml`. It will install the Zookeeper and the required dependencies. This is the YAML file for the Ansible playbook. 
 
 ```console
 
@@ -402,7 +402,7 @@ PLAY RECAP *********************************************************************
 
 ## Configure three node Kafka cluster through Ansible
 
-Using a text editor, save the code below in a file called `kafka_cluster.yaml` and install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below to in a file called `kafka_cluster.yaml`. It will install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
 
 ```console
 
@@ -624,7 +624,7 @@ After successfully setting up a 3 node Kafka cluster, we can verify it works by 
 
 ## Configure client through Ansible
 
-Using a text editor, save the code below in a file called `client.yaml` and install the Kafka and the required dependencies.This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below to in a file called `client.yaml`. It will install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
 
 ```console
 
@@ -692,7 +692,7 @@ PLAY RECAP *********************************************************************
 
 ## Describe the topic created:
 
-Do the ssh on client instance using following command. Replace the `client_ip` with the IP of client generated in inventory file present at location `/tmp/inventory`.
+Ssh on the client instance using the following command.
 
 ```console
 
@@ -701,6 +701,7 @@ ssh ubuntu@client_ip
 cd kafka_node/kafka_2.13-3.2.3
 
 ```
+Replace the `client_ip` with the IP of client generated in inventory file present at location `/tmp/inventory`.
 
 The output should be similar to:
 
@@ -834,7 +835,7 @@ ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-console-produ
 
 ## Run the consumer client to read all the events created:
 
-Open a new terminal on the client machine using following command.
+Open a new terminal on the client machine using the following command.
 
 ```console
 
