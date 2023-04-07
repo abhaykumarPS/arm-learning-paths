@@ -690,7 +690,7 @@ ssh ubuntu@client_ip
 cd kafka_node/kafka_2.13-3.2.3
 ./bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092
 ```
-Replace `kf_1_ip`, `kf_2_ip`, `kf_3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory` on the new terminal of the client machine to run the consumer client.
+Replace the `client_ip`, `kf_1_ip`, `kf_2_ip`, `kf_3_ip` with the IP of client, kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
 
 The output should be similar to:
 ```output
