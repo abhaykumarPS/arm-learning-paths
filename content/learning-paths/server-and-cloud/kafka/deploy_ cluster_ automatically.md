@@ -596,40 +596,11 @@ PLAY RECAP *********************************************************************
 Ssh on the client instance using the following command.
 ```console
 ssh ubuntu@client_ip
-
 cd kafka_node/kafka_2.13-3.2.3
-```
-Replace the `client_ip` with the IP of client generated in inventory file present at location `/tmp/inventory`.
-
-The output should be similar to:
-```output
-root@ip-172-31-38-39:/home/ubuntu/kf# ssh ubuntu@18.216.149.104
-Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.15.0-1014-aws aarch64)
-
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/advantage
-
- * Ubuntu Pro delivers the most comprehensive open source security and
-   compliance features.
-
-   https://ubuntu.com/aws/pro
-
-This system has been minimized by removing packages and content that are
-not required on a system that users do not log into.
-
-To restore this content, you can run the 'unminimize' command.
-
-128 updates can be applied immediately.
-75 of these updates are standard security updates.
-To see these additional updates run: apt list --upgradable
-
-Last login: Wed Apr  5 09:38:31 2023 from 18.191.180.133
-```
-Run the following command and replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
-```console
 ./bin/kafka-topics.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092 --describe
 ```
+Replace the `client_ip`, `kf_1_ip`, `kf_2_ip`, `kf_3_ip` with the IP of client, kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
+
 The output should be similar to:
 ```output
 ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-topics.sh --topic test-topic --bootstrap-server 3.19.64.64:9092,3.133.93.119:9092,18.222.0.36:9092 --describe
@@ -701,7 +672,7 @@ Topic: test-topic       TopicId: J_G3hNvpTjSXoQ4-gyPKYg PartitionCount: 64      
 ```
 ## Run the producer client to write events into the created topic:
 
-Run the following command and replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory` in the same client terminal where the topic was created.
+Run the following command in the same client terminal and folder where the topic was created and replace `kf_1_ip`, `kf_2_ip`, `kf_3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
 ```console
 ./bin/kafka-console-producer.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092
 ```
@@ -716,13 +687,11 @@ ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-console-produ
 Open a new terminal on the client machine using the following command.
 ```console
 ssh ubuntu@client_ip
-
 cd kafka_node/kafka_2.13-3.2.3
-```
-Run the following command and replace `kafka1_ip`, `kafka2_ip`, `kafka3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory` on the new terminal of the client machine to run the consumer client.
-```console
 ./bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092
 ```
+Replace `kf_1_ip`, `kf_2_ip`, `kf_3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory` on the new terminal of the client machine to run the consumer client.
+
 The output should be similar to:
 ```output
 ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server 3.19.64.64:9092,3.133.93.119:9092,18.222.0.36:9092
