@@ -593,7 +593,7 @@ PLAY RECAP *********************************************************************
 ```
 ## Describe the topic created:
 
-Ssh on the client instance using the following command.
+To describe the topic created ssh on the client instance and run the following command.
 ```console
 ssh ubuntu@client_ip
 cd kafka_node/kafka_2.13-3.2.3
@@ -684,7 +684,7 @@ ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-console-produ
 ```
 ## Run the consumer client to read all the events created:
 
-Open a new terminal on the client machine using the following command.
+Open a new terminal on the client machine and run the consumer client using the following command.
 ```console
 ssh ubuntu@client_ip
 cd kafka_node/kafka_2.13-3.2.3

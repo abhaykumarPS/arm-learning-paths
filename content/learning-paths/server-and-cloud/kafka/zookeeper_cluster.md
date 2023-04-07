@@ -77,7 +77,7 @@ tickTime=2000
 
 dataDir=/tmp/zookeeper
 
-clientPort=2182
+clientPort=2181
 
 maxClientCnxns=60
 
@@ -118,7 +118,7 @@ tickTime=2000
 
 dataDir=/tmp/zookeeper
 
-clientPort=2183
+clientPort=2181
 
 maxClientCnxns=60
 
