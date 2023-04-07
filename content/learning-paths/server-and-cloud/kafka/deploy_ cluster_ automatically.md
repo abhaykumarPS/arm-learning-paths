@@ -142,6 +142,12 @@ ${aws_instance.KAFKA_TEST[6].public_ip}
 [all:vars]
 ansible_connection=ssh
 ansible_user=ubuntu
+zk_1_ip=${aws_instance.KAFKA_TEST[0].public_ip}
+zk_2_ip=${aws_instance.KAFKA_TEST[1].public_ip}
+zk_3_ip=${aws_instance.KAFKA_TEST[2].public_ip}
+kf_1_ip=${aws_instance.KAFKA_TEST[3].public_ip}
+kf_2_ip=${aws_instance.KAFKA_TEST[4].public_ip}
+kf_3_ip=${aws_instance.KAFKA_TEST[5].public_ip}
                 EOF
 }
 
@@ -222,12 +228,7 @@ Apply complete! Resources: 11 added, 0 changed, 0 destroyed.
 Using a text editor, save the code below to in a file called `zookeeper_cluster.yaml`. It will install the Zookeeper and the required dependencies. This is the YAML file for the Ansible playbook. 
 ```console
 - hosts: zookeeper1, zookeeper2, zookeeper3
-  become: True
-  vars:
-    - zk_1_ip: "zookeeper1_ip"
-    - zk_2_ip: "zookeeper2_ip"
-    - zk_3_ip: "zookeeper3_ip"
-    
+  become: True    
   tasks:
   - name: Update machines and install Java, Zookeeper
     shell: |
@@ -380,12 +381,7 @@ PLAY RECAP *********************************************************************
 Using a text editor, save the code below to in a file called `kafka_cluster.yaml`. It will install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
 ```console
 - hosts: kafka1, kafka2, kafka3
-  become: True
-  vars:
-    - zk_1_ip: "zookeeper1_ip"
-    - zk_2_ip: "zookeeper2_ip"
-    - zk_3_ip: "zookeeper3_ip"
-    
+  become: True    
   tasks:
   - name: Update machines and install Java, Kafka
     shell: |
@@ -394,8 +390,7 @@ Using a text editor, save the code below to in a file called `kafka_cluster.yaml
            mkdir kafka_node
            cd kafka_node/ && wget https://dlcdn.apache.org/kafka/3.2.3/kafka_2.13-3.2.3.tgz && tar -xzf kafka_2.13-3.2.3.tgz && cd kafka_2.13-3.2.3
 
-  - name: On kafka1 instance create log directory
-    when: "'kafka1' in group_names"
+  - name: On all kafka instances create log directory
     shell: mkdir /tmp/kafka-logs
 
   - name: On kafka1 instance update broker id
@@ -406,26 +401,6 @@ Using a text editor, save the code below to in a file called `kafka_cluster.yaml
       line: 'broker.id=1'
       backrefs: yes
 
-  - name: On kafka1 instance uncomment listeners
-    when: "'kafka1' in group_names"
-    lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
-      regexp: '^(.*)#listeners=PLAINTEXT://:9092(.*)$'
-      line: 'listeners=PLAINTEXT://:9092'
-      backrefs: yes
-
-  - name: On kafka1 instance update zookeeper.connect
-    when: "'kafka1' in group_names"
-    lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
-      regexp: '^(.*)zookeeper.connect=localhost:2181(.*)$'
-      line: 'zookeeper.connect={{zk_1_ip}}:2181,{{zk_2_ip}}:2181,{{zk_3_ip}}:2181'
-      backrefs: yes
-
-  - name: On kafka2 instance create log directory
-    when: "'kafka2' in group_names"
-    shell: mkdir /tmp/kafka-logs
-
   - name: On kafka2 instance update broker id
     when: "'kafka2' in group_names"
     lineinfile:
@@ -433,27 +408,7 @@ Using a text editor, save the code below to in a file called `kafka_cluster.yaml
       regexp: '^(.*)broker.id(.*)$'
       line: 'broker.id=2'
       backrefs: yes
-      
-  - name: On kafka2 instance uncomment listeners
-    when: "'kafka2' in group_names"
-    lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
-      regexp: '^(.*)#listeners=PLAINTEXT://:9092(.*)$'
-      line: 'listeners=PLAINTEXT://:9092'
-      backrefs: yes
 
-  - name: On kafka2 instance update zookeeper.connect
-    when: "'kafka2' in group_names"
-    lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
-      regexp: '^(.*)zookeeper.connect=localhost:2181(.*)$'
-      line: 'zookeeper.connect={{zk_1_ip}}:2181,{{zk_2_ip}}:2181,{{zk_3_ip}}:2181'
-      backrefs: yes
-      
-  - name: On kafka3 instance create log directory
-    when: "'kafka3' in group_names"
-    shell: mkdir /tmp/kafka-logs
-    
   - name: On kafka3 instance update broker id
     when: "'kafka3' in group_names"
     lineinfile:
@@ -462,16 +417,14 @@ Using a text editor, save the code below to in a file called `kafka_cluster.yaml
       line: 'broker.id=3'
       backrefs: yes
 
-  - name: On kafka3 instance uncomment listeners
-    when: "'kafka3' in group_names"
+  - name: On all kafka instance uncomment listeners
     lineinfile:
       path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
       regexp: '^(.*)#listeners=PLAINTEXT://:9092(.*)$'
       line: 'listeners=PLAINTEXT://:9092'
       backrefs: yes
-      
-  - name: On kafka3 instance update zookeeper.connect
-    when: "'kafka3' in group_names"
+ 
+  - name: On all kafka instance update zookeeper.connect
     lineinfile:
       path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
       regexp: '^(.*)zookeeper.connect=localhost:2181(.*)$'
@@ -593,11 +546,6 @@ Using a text editor, save the code below to in a file called `client.yaml`. It w
 ```console
 - hosts: client
   become: true
-  vars:
-    - kf_1_ip: "kafka1_ip"
-    - kf_2_ip: "kafka2_ip"
-    - kf_3_ip: "kafka3_ip"
-    
   tasks:
   - name: Update machines and install Java, Kafka
     shell: |
