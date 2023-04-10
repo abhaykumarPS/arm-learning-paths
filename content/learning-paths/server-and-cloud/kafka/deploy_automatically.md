@@ -160,7 +160,7 @@ Make the changes listed below in **main.tf** to match your account settings.
 
 1. In the `provider` section, update all 3 values to use your preferred AWS region and your AWS access key ID and secret access key.
 
-2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm in the us-east-1 region is `ami-0f9bd9098aca2d42b ` No change is needed if you want to use Ubuntu AMI in us-east-1. The AMI ID values are region specific and need to be changed if you use another AWS region. Use the AWS EC2 console to find an AMI ID or refer to [Find a Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html).
+2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm in the us-east-2 region is `ami-0ca2eafa23bc3dd01 ` No change is needed if you want to use Ubuntu AMI in us-east-2. The AMI ID values are region specific and need to be changed if you use another AWS region. Use the AWS EC2 console to find an AMI ID or refer to [Find a Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html).
 
 {{% notice Note %}}
 The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
@@ -300,7 +300,6 @@ Using a text editor, save the code below to in a file called `zookeeper_cluster.
   - name: Start Zookeeper server
     command: /home/ubuntu/Zookeeper_node/apache-zookeeper-3.8.0-bin/bin/zkServer.sh start       
 ```
-No changes are required to the file.
 
 ### Ansible Commands
 
@@ -434,7 +433,6 @@ Using a text editor, save the code below to in a file called `kafka_cluster.yaml
   - name: Start kafka_server
     command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-server-start.sh /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties        
 ```
-No changes are required to the file.
 
 ### Ansible Commands
 
@@ -557,7 +555,6 @@ Using a text editor, save the code below to in a file called `client.yaml`. It w
   - name: Create a topic
     command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-topics.sh --create --topic test-topic --bootstrap-server {{kf_1_ip}}:9092,{{kf_2_ip}}:9092,{{kf_3_ip}}:9092 --replication-factor 3 --partitions 64
 ```
-No changes are required to the file.
 
 ### Ansible Commands
 
