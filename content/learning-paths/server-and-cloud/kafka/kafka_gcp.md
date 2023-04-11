@@ -190,82 +190,7 @@ Apply complete! Resources: 11 added, 0 changed, 0 destroyed.
 ```
 ## Configure three node Zookeeper cluster through Ansible
 
-You can use the same `zookeeper_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/redis/redis_cache_aws#configure-mysql-through-ansible).
-Using a text editor, save the code below to in a file called `zookeeper_cluster.yaml`. It will install the Zookeeper and the required dependencies. This is the YAML file for the Ansible playbook. 
-```console
-- hosts: zookeeper1, zookeeper2, zookeeper3
-  become: True    
-  tasks:
-  - name: Update machines and install Java, Zookeeper
-    shell: |
-           apt update
-           apt install -y default-jdk
-           mkdir Zookeeper_node
-           cd Zookeeper_node/ && wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz && tar -xzf apache-zookeeper-3.8.0-bin.tar.gz && cd apache-zookeeper-3.8.0-bin
-
-  - name: On zookeeper1 instance create Zookeeper directory
-    when: "'zookeeper1' in group_names"
-    shell: mkdir /tmp/zookeeper && echo 1 >> /tmp/zookeeper/myid
-    
-  - name: On zookeeper1 instance setup confiuration for Zookeeper cluster
-    when: "'zookeeper1' in group_names"
-    copy:
-      dest: "/home/ubuntu/Zookeeper_node/apache-zookeeper-3.8.0-bin/conf/zoo.cfg"
-      content: |
-        tickTime=2000
-        dataDir=/tmp/zookeeper
-        clientPort=2181
-        maxClientCnxns=60
-        initLimit=10
-        syncLimit=5
-        4lw.commands.whitelist=*
-        server.1=0.0.0.0:2888:3888
-        server.2={{zk_2_ip}}:2888:3888
-        server.3={{zk_3_ip}}:2888:3888
-
-  - name: On zookeeper2 instance create Zookeeper directory
-    when: "'zookeeper2' in group_names"
-    shell: mkdir /tmp/zookeeper && echo 2 >> /tmp/zookeeper/myid
-    
-  - name: On zookeeper1 instance setup confiuration for Zookeeper cluster
-    when: "'zookeeper2' in group_names"
-    copy:
-      dest: "/home/ubuntu/Zookeeper_node/apache-zookeeper-3.8.0-bin/conf/zoo.cfg"
-      content: |
-        tickTime=2000
-        dataDir=/tmp/zookeeper
-        clientPort=2181
-        maxClientCnxns=60
-        initLimit=10
-        syncLimit=5
-        4lw.commands.whitelist=*
-        server.1={{zk_1_ip}}:2888:3888
-        server.2=0.0.0.0:2888:3888
-        server.3={{zk_3_ip}}:2888:3888
-        
-  - name: On zookeeper3 instance create Zookeeper directory
-    when: "'zookeeper3' in group_names"
-    shell: mkdir /tmp/zookeeper && echo 3 >> /tmp/zookeeper/myid
-    
-  - name: On zookeeper3 instance setup confiuration for Zookeeper cluster
-    when: "'zookeeper3' in group_names"
-    copy:
-      dest: "/home/ubuntu/Zookeeper_node/apache-zookeeper-3.8.0-bin/conf/zoo.cfg"
-      content: |
-        tickTime=2000
-        dataDir=/tmp/zookeeper
-        clientPort=2181
-        maxClientCnxns=60
-        initLimit=10
-        syncLimit=5
-        4lw.commands.whitelist=*
-        server.1={{zk_1_ip}}:2888:3888
-        server.2={{zk_2_ip}}:2888:3888
-        server.3=0.0.0.0:2888:3888
-        
-  - name: Start Zookeeper server
-    command: /home/ubuntu/Zookeeper_node/apache-zookeeper-3.8.0-bin/bin/zkServer.sh start       
-```
+You can use the same `zookeeper_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws.md).
 
 ### Ansible Commands
 
@@ -343,62 +268,7 @@ PLAY RECAP *********************************************************************
 ```
 ## Configure three node Kafka cluster through Ansible
 
-Using a text editor, save the code below to in a file called `kafka_cluster.yaml`. It will install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
-```console
-- hosts: kafka1, kafka2, kafka3
-  become: True    
-  tasks:
-  - name: Update machines and install Java, Kafka
-    shell: |
-           apt update
-           apt install -y default-jdk
-           mkdir kafka_node
-           cd kafka_node/ && wget https://dlcdn.apache.org/kafka/3.2.3/kafka_2.13-3.2.3.tgz && tar -xzf kafka_2.13-3.2.3.tgz && cd kafka_2.13-3.2.3
-
-  - name: On all kafka instances create log directory
-    shell: mkdir /tmp/kafka-logs
-
-  - name: On kafka1 instance update broker id
-    when: "'kafka1' in group_names"
-    lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
-      regexp: '^(.*)broker.id(.*)$'
-      line: 'broker.id=1'
-      backrefs: yes
-
-  - name: On kafka2 instance update broker id
-    when: "'kafka2' in group_names"
-    lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
-      regexp: '^(.*)broker.id(.*)$'
-      line: 'broker.id=2'
-      backrefs: yes
-
-  - name: On kafka3 instance update broker id
-    when: "'kafka3' in group_names"
-    lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
-      regexp: '^(.*)broker.id(.*)$'
-      line: 'broker.id=3'
-      backrefs: yes
-
-  - name: On all kafka instance uncomment listeners
-    lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
-      regexp: '^(.*)#listeners=PLAINTEXT://:9092(.*)$'
-      line: 'listeners=PLAINTEXT://:9092'
-      backrefs: yes
- 
-  - name: On all kafka instance update zookeeper.connect
-    lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
-      regexp: '^(.*)zookeeper.connect=localhost:2181(.*)$'
-      line: 'zookeeper.connect={{zk_1_ip}}:2181,{{zk_2_ip}}:2181,{{zk_3_ip}}:2181'
-      backrefs: yes
-      
-  - name: Start kafka_server
-    command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-server-start.sh /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties        
-```
+You can use the same `kafka_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws.md). 
 
 ### Ansible Commands
 
@@ -506,21 +376,7 @@ After successfully setting up a 3 node Kafka cluster, we can verify it works by 
 
 ## Configure client through Ansible
 
-Using a text editor, save the code below to in a file called `client.yaml`. It will install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
-```console
-- hosts: client
-  become: true
-  tasks:
-  - name: Update machines and install Java, Kafka
-    shell: |
-           apt update
-           apt install -y default-jdk
-           mkdir kafka_node
-           cd kafka_node/ && wget https://dlcdn.apache.org/kafka/3.2.3/kafka_2.13-3.2.3.tgz && tar -xzf kafka_2.13-3.2.3.tgz && cd kafka_2.13-3.2.3
-           
-  - name: Create a topic
-    command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-topics.sh --create --topic test-topic --bootstrap-server {{kf_1_ip}}:9092,{{kf_2_ip}}:9092,{{kf_3_ip}}:9092 --replication-factor 3 --partitions 64
-```
+You can use the same `client.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws.md).
 
 ### Ansible Commands
 
