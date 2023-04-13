@@ -43,7 +43,7 @@ documentation](/install-guides/ssh#ssh-keys).
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-## Create Azure instances using Terraform
+## Create seven Azure instances using Terraform
 
 For Azure Arm based instance deployment, the Terraform configuration is broken into three files: `providers.tf`, `variables.tf` and `main.tf`. Here we are creating 7 instances.
 
