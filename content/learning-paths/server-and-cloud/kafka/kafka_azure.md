@@ -11,8 +11,7 @@ layout: "learningpathall"
 ##  Deploy Cluster Automatically 
 
 You can deploy three node Zookeeper cluster, three node Kafka cluster and one client on Azure using Terraform and Ansible. 
-In this section, you will deploy Redis as a cache for MySQL on an Azure instance. 
-
+ 
 If you are new to Terraform, you should look at [Automate Azure instance creation using Terraform](/learning-paths/server-and-cloud/azure/terraform/) before starting this Learning Path.
 
 ## Before you begin
