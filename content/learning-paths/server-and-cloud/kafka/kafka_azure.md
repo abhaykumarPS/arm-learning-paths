@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy Cluster Automatically(azure)"
+title: "Deploy Cluster Automatically((Azure)"
 
 weight: 6 # 1 is first, 2 is second, etc.
 
