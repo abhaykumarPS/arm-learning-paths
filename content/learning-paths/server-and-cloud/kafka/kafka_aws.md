@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy Cluster Automatically"
+title: "Deploy Cluster Automatically(AWS)"
 
 weight: 7 # 1 is first, 2 is second, etc.
 
