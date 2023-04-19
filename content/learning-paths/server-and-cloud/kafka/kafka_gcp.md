@@ -192,7 +192,7 @@ Apply complete! Resources: 11 added, 0 changed, 0 destroyed.
 ```
 ## Configure three node Zookeeper cluster through Ansible
 
-You can use the same `zookeeper_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws.md).
+You can use the same `zookeeper_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
 
 ### Ansible Commands
 
@@ -270,7 +270,7 @@ PLAY RECAP *********************************************************************
 ```
 ## Configure three node Kafka cluster through Ansible
 
-You can use the same `kafka_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws.md). 
+You can use the same `kafka_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible). 
 
 ### Ansible Commands
 
@@ -378,7 +378,7 @@ After successfully setting up a 3 node Kafka cluster, we can verify it works by 
 
 ## Configure client through Ansible
 
-You can use the same `client.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws.md).
+You can use the same `client.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
 
 ### Ansible Commands
 
