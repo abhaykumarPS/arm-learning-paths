@@ -50,7 +50,7 @@ Using a text editor, save the code below to in a file called `main.tf`
 Scroll down to see the information you need to change in `main.tf`
 ```console
 provider "google" {
-  project = "gke-cluster-375814"
+  project = "project_id"
   region = "us-central1"
   zone = "us-central1-a"
 }
@@ -78,7 +78,7 @@ resource "google_compute_instance" "KAFKA_TEST" {
 }
 
 resource "google_compute_firewall" "rules" {
-  project     = "gke-cluster-375814"
+  project     = "project_id"
   name        = "my-firewall-rule"
   network     = "default"
   description = "Open ssh connection and kafka port"
