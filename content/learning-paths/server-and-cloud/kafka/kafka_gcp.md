@@ -169,7 +169,7 @@ The output should be similar to the output attached in the section, [Deploy Clus
 
 ## Configure three node Kafka cluster through Ansible
 
-You can use the same `kafka_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible). 
+You can use the same `kafka_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-three-node-kafka-cluster-through-ansible). 
 
 ### Ansible Commands
 
@@ -181,7 +181,7 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-three-node-kafka-cluster-through-ansible).
 
 Kafka servers are started on all the three kafka instaces. Make sure this terminal is not closed. Open a new terminal on the same machine and configure the client through Ansible.
 
@@ -189,7 +189,7 @@ After successfully setting up a 3 node Kafka cluster, we can verify it works by 
 
 ## Configure client through Ansible
 
-You can use the same `client.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
+You can use the same `client.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-client-through-ansible).
 
 ### Ansible Commands
 
@@ -201,18 +201,18 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-client-through-ansible).
 
 ## Describe the topic created:
 
-To describe the topic created ssh on the client instance and run the command used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/content/learning-paths/server-and-cloud/kafka/kafka_aws.md#describe-the-topic-created).
+To describe the topic created ssh on the client instance and run the command used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#describe-the-topic-created).
 
 ## Run the producer client to write events into the created topic:
 
-To run the producer client to write events into the created topic follow the document used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/content/learning-paths/server-and-cloud/kafka/kafka_aws.md#run-the-producer-client-to-write-events-into-the-created-topic).
+To run the producer client to write events into the created topic follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#run-the-producer-client-to-write-events-into-the-created-topic).
 
 ## Run the consumer client to read all the events created:
 
-To run the consumer client to read all the events created follow the document used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/content/learning-paths/server-and-cloud/kafka/kafka_aws.md#run-the-consumer-client-to-read-all-the-events-created).
+To run the consumer client to read all the events created follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#run-the-consumer-client-to-read-all-the-events-created).
 
 Write a message into the producer client terminal and press enter. You should see the same message appear on consumer client terminal. 
