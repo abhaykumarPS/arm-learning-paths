@@ -141,23 +141,19 @@ Use Terraform to deploy the `main.tf` file.
 
 ### Initialize Terraform
 
-To initialize Terraform follow the document used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/content/learning-paths/server-and-cloud/kafka/kafka_aws.md#initialize-terraform).
+To initialize Terraform follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#initialize-terraform).
    
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
-
 ### Create a Terraform execution plan
 
-To create a Terraform execution plan follow the document used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/content/learning-paths/server-and-cloud/kafka/kafka_aws.md#create-a-terraform-execution-plan). 
+To create a Terraform execution plan follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#create-a-terraform-execution-plan). 
 
 ### Apply the Terraform execution plan
 
-To apply the Terraform execution plan follow the document used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/content/learning-paths/server-and-cloud/kafka/kafka_aws.md#apply-the-terraform-execution-plan).
-
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
+To apply the Terraform execution plan follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#apply-the-terraform-execution-plan).
 
 ## Configure three node Zookeeper cluster through Ansible
 
-You can use the same `zookeeper_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
+You can use the same `zookeeper_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-three-node-zookeeper-cluster-through-ansible).
 
 ### Ansible Commands
 
@@ -169,7 +165,7 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-three-node-zookeeper-cluster-through-ansible).
 
 ## Configure three node Kafka cluster through Ansible
 
