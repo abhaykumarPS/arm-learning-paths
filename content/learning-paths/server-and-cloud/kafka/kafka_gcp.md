@@ -165,7 +165,7 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-three-node-zookeeper-cluster-through-ansible).
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#ansible-commands).
 
 ## Configure three node Kafka cluster through Ansible
 
@@ -181,7 +181,7 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-three-node-kafka-cluster-through-ansible).
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#ansible-commands-1).
 
 Kafka servers are started on all the three kafka instaces. Make sure this terminal is not closed. Open a new terminal on the same machine and configure the client through Ansible.
 
@@ -201,7 +201,7 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-client-through-ansible).
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#ansible-commands-2).
 
 ## Describe the topic created:
 
