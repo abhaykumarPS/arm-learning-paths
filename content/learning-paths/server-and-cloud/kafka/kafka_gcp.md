@@ -8,7 +8,7 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-##  Deploy Cluster Automatically 
+##  Deploy Cluster Automatically (GCP) 
 
 You can deploy three node Zookeeper cluster, three node Kafka cluster and one client on Google Cloud using Terraform and Ansible. 
  
