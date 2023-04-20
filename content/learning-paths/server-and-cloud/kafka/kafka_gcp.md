@@ -211,18 +211,12 @@ The output should be similar to the output attached in the section, [Deploy Clus
 
 To describe the topic created ssh on the client instance and run the command used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/content/learning-paths/server-and-cloud/kafka/kafka_aws.md#describe-the-topic-created).
 
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
-
 ## Run the producer client to write events into the created topic:
 
 To run the producer client to write events into the created topic follow the document used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/content/learning-paths/server-and-cloud/kafka/kafka_aws.md#run-the-producer-client-to-write-events-into-the-created-topic).
 
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
-
 ## Run the consumer client to read all the events created:
 
 To run the consumer client to read all the events created follow the document used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/content/learning-paths/server-and-cloud/kafka/kafka_aws.md#run-the-consumer-client-to-read-all-the-events-created).
-
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
 
 Write a message into the producer client terminal and press enter. You should see the same message appear on consumer client terminal. 
