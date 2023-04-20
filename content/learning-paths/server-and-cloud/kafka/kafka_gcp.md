@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy Cluster Automatically(GCP)"
+title: "Deploy Cluster Automatically (GCP)"
 
 weight: 6 # 1 is first, 2 is second, etc.
 
@@ -204,70 +204,8 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to:
-```output
-root@ip-172-31-38-39:/home/ubuntu/kf# ansible-playbook zookeeper_cluster.yaml -i /tmp/inventory
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
 
-PLAY [zookeeper1, zookeeper2, zookeeper3] ***********************************************************************************************
-
-TASK [Gathering Facts] ******************************************************************************************************************
-The authenticity of host '18.222.137.38 (18.222.137.38)' can't be established.
-ED25519 key fingerprint is SHA256:078u3zYJtAMqmZTWI1qGLNTdlp/iDtqgxnrUV7NLjNA.
-This key is not known by any other names
-The authenticity of host '18.117.144.56 (18.117.144.56)' can't be established.
-ED25519 key fingerprint is SHA256:pdmVviF1LTQOrM5t0Pp3yrsL+M3DsJdbYjGtmb5h44c.
-This key is not known by any other names
-Are you sure you want to continue connecting (yes/no/[fingerprint])? ok: [3.140.201.79]
-yes
-ok: [18.222.137.38]
-yes
-ok: [18.117.144.56]
-
-TASK [Update machines and install Java, Zookeeper] **************************************************************************************
-changed: [18.222.137.38]
-changed: [3.140.201.79]
-changed: [18.117.144.56]
-
-TASK [On zookeeper1 instance create Zookeeper directory] ********************************************************************************
-skipping: [18.117.144.56]
-skipping: [3.140.201.79]
-changed: [18.222.137.38]
-
-TASK [On zookeeper1 instance setup confiuration for Zookeeper cluster] ******************************************************************
-skipping: [18.117.144.56]
-skipping: [3.140.201.79]
-changed: [18.222.137.38]
-
-TASK [On zookeeper2 instance create Zookeeper directory] ********************************************************************************
-skipping: [18.222.137.38]
-skipping: [3.140.201.79]
-changed: [18.117.144.56]
-
-TASK [On zookeeper1 instance setup confiuration for Zookeeper cluster] ******************************************************************
-skipping: [18.222.137.38]
-skipping: [3.140.201.79]
-changed: [18.117.144.56]
-
-TASK [On zookeeper3 instance create Zookeeper directory] ********************************************************************************
-skipping: [18.222.137.38]
-skipping: [18.117.144.56]
-changed: [3.140.201.79]
-
-TASK [On zookeeper3 instance setup confiuration for Zookeeper cluster] ******************************************************************
-skipping: [18.222.137.38]
-skipping: [18.117.144.56]
-changed: [3.140.201.79]
-
-TASK [Start Zookeeper server] ***********************************************************************************************************
-changed: [18.222.137.38]
-changed: [18.117.144.56]
-changed: [3.140.201.79]
-
-PLAY RECAP ******************************************************************************************************************************
-18.117.144.56              : ok=5    changed=4    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0
-18.222.137.38              : ok=5    changed=4    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0
-3.140.201.79               : ok=5    changed=4    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0
-```
 ## Configure three node Kafka cluster through Ansible
 
 You can use the same `kafka_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible). 
@@ -282,96 +220,8 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to:
-```output
-root@ip-172-31-38-39:/home/ubuntu/kf# ansible-playbook kafka_cluster.yaml -i /tmp/inventory
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
 
-PLAY [kafka1, kafka2, kafka3] ***********************************************************************************************************
-
-TASK [Gathering Facts] ******************************************************************************************************************
-The authenticity of host '3.19.64.64 (3.19.64.64)' can't be established.
-ED25519 key fingerprint is SHA256:3qKhnEt0Js8LL67OAcIDOsTx8qQGRlQlsJ8ZZX9Fz1E.
-This key is not known by any other names
-The authenticity of host '3.133.93.119 (3.133.93.119)' can't be established.
-ED25519 key fingerprint is SHA256:rI7qWf3fDGIkB+EqrPCa18maKeVck951WklPmeAQoXc.
-This key is not known by any other names
-The authenticity of host '18.222.0.36 (18.222.0.36)' can't be established.
-ED25519 key fingerprint is SHA256:+Gv6OFuOLlaIIiQRtRccpmA5vA0wC7SqriwyudB8K34.
-This key is not known by any other names
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-ok: [3.19.64.64]
-yes
-ok: [3.133.93.119]
-yes
-ok: [18.222.0.36]
-
-TASK [Update machines and install Java, Kafka] ******************************************************************************************
-changed: [18.222.0.36]
-changed: [3.133.93.119]
-changed: [3.19.64.64]
-
-TASK [On kafka1 instance create log directory] ******************************************************************************************
-skipping: [3.133.93.119]
-skipping: [18.222.0.36]
-changed: [3.19.64.64]
-
-TASK [On kafka1 instance update broker id] **********************************************************************************************
-skipping: [3.133.93.119]
-skipping: [18.222.0.36]
-changed: [3.19.64.64]
-
-TASK [On kafka1 instance uncomment listeners] *******************************************************************************************
-skipping: [3.133.93.119]
-skipping: [18.222.0.36]
-changed: [3.19.64.64]
-
-TASK [On kafka1 instance update zookeeper.connect] **************************************************************************************
-skipping: [3.133.93.119]
-skipping: [18.222.0.36]
-changed: [3.19.64.64]
-
-TASK [On kafka2 instance create log directory] ******************************************************************************************
-skipping: [3.19.64.64]
-skipping: [18.222.0.36]
-changed: [3.133.93.119]
-
-TASK [On kafka2 instance update broker id] **********************************************************************************************
-skipping: [3.19.64.64]
-skipping: [18.222.0.36]
-changed: [3.133.93.119]
-
-TASK [On kafka2 instance uncomment listeners] *******************************************************************************************
-skipping: [3.19.64.64]
-skipping: [18.222.0.36]
-changed: [3.133.93.119]
-
-TASK [On kafka2 instance update zookeeper.connect] **************************************************************************************
-skipping: [3.19.64.64]
-skipping: [18.222.0.36]
-changed: [3.133.93.119]
-
-TASK [On kafka3 instance create log directory] ******************************************************************************************
-skipping: [3.19.64.64]
-skipping: [3.133.93.119]
-changed: [18.222.0.36]
-
-TASK [On kafka3 instance update broker id] **********************************************************************************************
-skipping: [3.19.64.64]
-skipping: [3.133.93.119]
-changed: [18.222.0.36]
-
-TASK [On kafka3 instance uncomment listeners] *******************************************************************************************
-skipping: [3.19.64.64]
-skipping: [3.133.93.119]
-changed: [18.222.0.36]
-
-TASK [On kafka3 instance update zookeeper.connect] **************************************************************************************
-skipping: [3.19.64.64]
-skipping: [3.133.93.119]
-changed: [18.222.0.36]
-
-TASK [Start kafka_server] ***************************************************************************************************************
-```
 Kafka servers are started on all the three kafka instaces. Make sure this terminal is not closed. Open a new terminal on the same machine and configure the client through Ansible.
 
 After successfully setting up a 3 node Kafka cluster, we can verify it works by creating a topic and storing the events. Follow the steps below to create a topic, write some events into the topic, and then read the events.
@@ -390,28 +240,8 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to:
-```output
-root@ip-172-31-38-39:/home/ubuntu/kf# ansible-playbook client.yaml -i /tmp/inventory
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
 
-PLAY [client] ***************************************************************************************************************************
-
-TASK [Gathering Facts] ******************************************************************************************************************
-The authenticity of host '18.216.149.104 (18.216.149.104)' can't be established.
-ED25519 key fingerprint is SHA256:fPpeusF+HmRq8+Rc3erkW7/Je6gTZy/c1iA0eF4Iguo.
-This key is not known by any other names
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-ok: [18.216.149.104]
-
-TASK [Update machines and install Java, Kafka] ******************************************************************************************
-changed: [18.216.149.104]
-
-TASK [Create a topic] *******************************************************************************************************************
-changed: [18.216.149.104]
-
-PLAY RECAP ******************************************************************************************************************************
-18.216.149.104             : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-```
 ## Describe the topic created:
 
 To describe the topic created ssh on the client instance and run the following command.
@@ -422,75 +252,8 @@ cd kafka_node/kafka_2.13-3.2.3
 ```
 Replace the `client_ip`, `kf_1_ip`, `kf_2_ip`, `kf_3_ip` with the IP of client, kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
 
-The output should be similar to:
-```output
-ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-topics.sh --topic test-topic --bootstrap-server 3.19.64.64:9092,3.133.93.119:9092,18.222.0.36:9092 --describe
-Topic: test-topic       TopicId: J_G3hNvpTjSXoQ4-gyPKYg PartitionCount: 64      ReplicationFactor: 3    Configs: segment.bytes=1073741824
-        Topic: test-topic       Partition: 0    Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
-        Topic: test-topic       Partition: 1    Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
-        Topic: test-topic       Partition: 2    Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
-        Topic: test-topic       Partition: 3    Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-        Topic: test-topic       Partition: 4    Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
-        Topic: test-topic       Partition: 5    Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
-        Topic: test-topic       Partition: 6    Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
-        Topic: test-topic       Partition: 7    Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
-        Topic: test-topic       Partition: 8    Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
-        Topic: test-topic       Partition: 9    Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-        Topic: test-topic       Partition: 10   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
-        Topic: test-topic       Partition: 11   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
-        Topic: test-topic       Partition: 12   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
-        Topic: test-topic       Partition: 13   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
-        Topic: test-topic       Partition: 14   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
-        Topic: test-topic       Partition: 15   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-        Topic: test-topic       Partition: 16   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
-        Topic: test-topic       Partition: 17   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
-        Topic: test-topic       Partition: 18   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
-        Topic: test-topic       Partition: 19   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
-        Topic: test-topic       Partition: 20   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
-        Topic: test-topic       Partition: 21   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-        Topic: test-topic       Partition: 22   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
-        Topic: test-topic       Partition: 23   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
-        Topic: test-topic       Partition: 24   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
-        Topic: test-topic       Partition: 25   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
-        Topic: test-topic       Partition: 26   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
-        Topic: test-topic       Partition: 27   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-        Topic: test-topic       Partition: 28   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
-        Topic: test-topic       Partition: 29   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
-        Topic: test-topic       Partition: 30   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
-        Topic: test-topic       Partition: 31   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
-        Topic: test-topic       Partition: 32   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
-        Topic: test-topic       Partition: 33   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-        Topic: test-topic       Partition: 34   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
-        Topic: test-topic       Partition: 35   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
-        Topic: test-topic       Partition: 36   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
-        Topic: test-topic       Partition: 37   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
-        Topic: test-topic       Partition: 38   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
-        Topic: test-topic       Partition: 39   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-        Topic: test-topic       Partition: 40   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
-        Topic: test-topic       Partition: 41   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
-        Topic: test-topic       Partition: 42   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
-        Topic: test-topic       Partition: 43   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
-        Topic: test-topic       Partition: 44   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
-        Topic: test-topic       Partition: 45   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-        Topic: test-topic       Partition: 46   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
-        Topic: test-topic       Partition: 47   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
-        Topic: test-topic       Partition: 48   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
-        Topic: test-topic       Partition: 49   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
-        Topic: test-topic       Partition: 50   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
-        Topic: test-topic       Partition: 51   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-        Topic: test-topic       Partition: 52   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
-        Topic: test-topic       Partition: 53   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
-        Topic: test-topic       Partition: 54   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
-        Topic: test-topic       Partition: 55   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
-        Topic: test-topic       Partition: 56   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
-        Topic: test-topic       Partition: 57   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-        Topic: test-topic       Partition: 58   Leader: 3       Replicas: 3,2,1 Isr: 3,2,1
-        Topic: test-topic       Partition: 59   Leader: 1       Replicas: 1,3,2 Isr: 1,3,2
-        Topic: test-topic       Partition: 60   Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
-        Topic: test-topic       Partition: 61   Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
-        Topic: test-topic       Partition: 62   Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
-        Topic: test-topic       Partition: 63   Leader: 2       Replicas: 2,1,3 Isr: 2,1,3
-```
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](https://github.com/abhisheknishantpuresoftware/arm-learning-paths/blob/Testing/learning-paths/server-and-cloud/kafka/kafka_aws.md#configure-three-node-zookeeper-cluster-through-ansible).
+
 ## Run the producer client to write events into the created topic:
 
 Run the following command in the same client terminal and folder where the topic was created and replace `kf_1_ip`, `kf_2_ip`, `kf_3_ip` with the IP of kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
