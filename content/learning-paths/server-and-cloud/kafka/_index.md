@@ -9,7 +9,8 @@ learning_objectives:
     - Install Zookeeper and Kafka
     - Configure Zookeeper to work with Kafka
     - Test write/read events into the Kafka cluster
-    - Deploy Cluster Automatically
+    - Deploy Cluster Automatically (AWS)
+    - Deploy Cluster Automatically (GCP)
 
 prerequisites:
     - Seven physical machines or seven cloud instances with Ubuntu or Debian installed to create three Kafka nodes, three Zookeeper nodes, and one client node.
