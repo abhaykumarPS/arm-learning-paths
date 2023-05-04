@@ -138,6 +138,7 @@ The inventory file is automatically generated and does not need to be changed.
 ## Terraform Commands
 
 Use Terraform to deploy the `main.tf` file.
+
 To initialize Terraform, create a Terraform execution plan and apply the Terraform execution plan follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#terraform-commands).
 
 ## Configure three node Zookeeper cluster through Ansible
