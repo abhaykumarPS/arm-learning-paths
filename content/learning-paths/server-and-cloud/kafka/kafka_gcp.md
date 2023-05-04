@@ -185,7 +185,7 @@ The output should be similar to the output attached in the section, [Deploy Clus
 
 Kafka servers are started on all the three instances and keep the terminal open. Now open a new terminal on the same machine and configure the client through Ansible.
 
-After successfully setting up a 3 node Kafka cluster, we can verify it works by creating a topic and storing the events. Follow the steps below to create a topic, write some events into the topic, and then read the events.
+After successfully setting up a 3 node Kafka cluster, we can verify it by creating a topic and storing the events. Follow the steps below to create a topic, write some events into the topic, and then read the events.
 
 ## Configure client through Ansible
 
