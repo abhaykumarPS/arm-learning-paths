@@ -270,13 +270,13 @@ You’ll get asked some general questions after running that last line. Just fil
 
 Next we need to finish editing the Jupyter Configuration file we created earlier. Change directory to:
 
-``console
+```console
 cd ~/.jupyter/
 ```
 Then we will use visual editor (vi) to edit the file. Type:
 ```console
 vi jupyter_notebook_config.py
-``
+```
 You should see a bunch of commented Python code, this is where you can either uncomment lines or add in your own (things such as adding password protection are an option here). We will keep things simple.
 
 Press i on your keyboard to activate -INSERT-. Then at the top of the file type:
