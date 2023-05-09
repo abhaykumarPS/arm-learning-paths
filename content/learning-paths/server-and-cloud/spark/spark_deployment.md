@@ -233,36 +233,35 @@ ssh ubuntu@Master_public_IP
 
 For deploying spark on aws graviton2, we need to install below tools and depencies on our ec2 instance
 ```console
-      sudo apt-get update 
-      sudo apt install python3-pip 
-      pip3 install jupyter 
-      sudo apt-get install default-jre 
-      sudo apt-get install scala 
-      pip3 install py4j
-      pip3 install findspark
-      pip3 install pyspark
+sudo apt-get update 
+sudo apt install python3-pip 
+pip3 install jupyter 
+sudo apt-get install default-jre 
+sudo apt-get install scala 
+pip3 install py4j
+pip3 install findspark
+pip3 install pyspark
  ```
  **Install and extract spark binary:**
  
  We need to install spark binary on aur ec2 instance by followed below command .
  ```console
-       sudo wget https://archive.apache.org/dist/spark/spark-3.2.2/spark-3.2.2-bin-hadoop2.7.tgz
-       sudo tar -zxvf spark-3.2.2-bin-hadoop2.7.tgz
+ sudo wget https://archive.apache.org/dist/spark/spark-3.2.2/spark-3.2.2-bin-hadoop2.7.tgz
+ sudo tar -zxvf spark-3.2.2-bin-hadoop2.7.tgz
 ```
 **config Jupyter notebook:**
 
 Jupyter comes with Anaconda, but we will need to configure it in order to use it through EC2 and connect with SSH. Go ahead and generate a configuration file for Jupyter using:
 ```console
-      jupyter notebook --generate-config
+ jupyter notebook --generate-config
 ```
 **Create Certifications:**
 
 We can also create certifications for our connections in the form of .pem files. Perform the following:
 ```console
-      cd cert/
-      pip3 install findspark
-      jupyter notebook --generate-config 
-      sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mycert.pem -out mycert.pem
+ cd cert/
+ pip3 install findspark
+ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mycert.pem -out mycert.pem
 ```
 You’ll get asked some general questions after running that last line. Just fill them out with some general information.
 
@@ -281,10 +280,10 @@ You should see a bunch of commented Python code, this is where you can either un
 
 Press i on your keyboard to activate -INSERT-. Then at the top of the file type:
 ```console
-      c.NotebookApp.certfile = u'/home/ubuntu/certs/mycert.pem'
-      c.NotebookApp.ip = '*' 
-      c.NotebookApp.port = 8888 
-      c.NotebookApp.open_browser = False
+ c.NotebookApp.certfile = u'/home/ubuntu/certs/mycert.pem'
+ c.NotebookApp.ip = '*' 
+ c.NotebookApp.port = 8888 
+ c.NotebookApp.open_browser = False
  ```
  Once you’ve typed/pasted this code in your config file, press Esc to stop inserting. Then type a colon : and then type wq to write and quit the editor.
  
