@@ -360,7 +360,7 @@ You’ll see an output saying that a jupyter notebook is running at all ip addre
 https://ec2-xx-xx-xxx-xxx.us-west-2.compute.amazonaws.com:8888
 ```
 After putting that into your browser you’ll probably get a warning of an untrusted certificate, go ahead and click through that and connect anyway, you trust the site. (Hopefully, after all you are the one that made it!)
-To access the notebook, copy and paste one of these URLs in the browser and run the below code line by line in jupyter notebook:
+Run the below code line by line in jupyter notebook:
 ```console
 import pyspark
 import findspark
