@@ -223,7 +223,7 @@ Master_public_IP = [
 ]
 
 ```
-### Configure Spark
+## Configure Spark
 **Login to the deployed instance, using SSH to the public IP of the AWS EC2 instance..**
 
 ``` console
