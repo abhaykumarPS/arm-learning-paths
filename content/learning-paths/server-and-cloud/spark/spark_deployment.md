@@ -287,7 +287,7 @@ Press i on your keyboard to activate -INSERT-. Then at the top of the file type:
  Once you’ve typed/pasted this code in your config file, press Esc to stop inserting. Then type a colon : and then type wq to write and quit the editor.
 
 ## Configure spark by Ansible
-
+Using a text editor, save the code below to in a file called `spark.yaml`. It will install the Spark and the required dependencies. This is the YAML file for the Ansible playbook.
 ```console
 ---
 - name: spark config
@@ -347,7 +347,82 @@ Press i on your keyboard to activate -INSERT-. Then at the top of the file type:
                c.NotebookApp.open_browser = False
         insertafter: c = get_config()  #noqa
 ```
+## Ansible Commands
+Run the playbook using the `ansible-playbook` command:
+```console
+ansible-playbook zookeeper_cluster.yaml -i /tmp/inventory
+```
+Answer yes when prompted for the SSH connection.
+
+Deployment may take a few minutes.
+
+The output should be similar to:
+```output
+root@ip-172-31-38-39:/home/ubuntu/spark# ansible-playbook spark.yaml -i /tmp/inventory
+
+PLAY [spark config] ***********************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************
+ok: [3.14.135.50]
+
+TASK [Update the Machine & Install Dependencies] ******************************************************************************************
+changed: [3.14.135.50]
+
+TASK [Update apt repo and cache on all Debian/Ubuntu boxes] *******************************************************************************
+changed: [3.14.135.50]
+
+TASK [Install Python pip & Python package] ************************************************************************************************
+ok: [3.14.135.50] => (item=python3-pip)
+
+TASK [Install jupyter] ********************************************************************************************************************
+changed: [3.14.135.50]
+
+TASK [Install Notebook] *******************************************************************************************************************
+changed: [3.14.135.50]
+
+TASK [Install Java and related Dependencies] **********************************************************************************************
+changed: [3.14.135.50]
+
+TASK [Install scala] **********************************************************************************************************************
+changed: [3.14.135.50]
+
+TASK [Update the Machine & Install Dependencies] ******************************************************************************************
+changed: [3.14.135.50]
+
+TASK [Install openssl] ********************************************************************************************************************
+changed: [3.14.135.50]
+
+TASK [Install spark] **********************************************************************************************************************
+changed: [3.14.135.50]
+
+TASK [Install findspark] ******************************************************************************************************************
+changed: [3.14.135.50]
+
+TASK [Install and extract spark binary] ***************************************************************************************************
+changed: [3.14.135.50]
+
+TASK [install pipenv] *********************************************************************************************************************
+changed: [3.14.135.50]
+
+TASK [configure] **************************************************************************************************************************
+changed: [3.14.135.50]
+
+TASK [Create directory and config Jupyter notebook] ***************************************************************************************
+changed: [3.14.135.50]
+
+TASK [Edit Configuration File] ************************************************************************************************************
+changed: [3.14.135.50]
+
+PLAY RECAP ********************************************************************************************************************************
+3.14.135.50                : ok=17   changed=15   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
 ## Check that Jupyter Notebook is working with spark
+First, Log in to the node using SSH:
+
+```console
+ssh ubuntu@Public_ip_of_node
+```
 
 You should now have everything set up to launch Juptyer notebook with Spark! Run:
 ```console
