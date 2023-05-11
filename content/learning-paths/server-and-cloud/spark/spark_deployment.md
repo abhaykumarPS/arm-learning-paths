@@ -260,7 +260,6 @@ Jupyter comes with Anaconda, but we will need to configure it in order to use it
 We can also create certifications for our connections in the form of .pem files. Perform the following:
 ```console
  cd cert/
- pip3 install findspark
  sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mycert.pem -out mycert.pem
 ```
 You’ll get asked some general questions after running that last line. Just fill them out with some general information.
@@ -287,7 +286,7 @@ Press i on your keyboard to activate -INSERT-. Then at the top of the file type:
  ```
  Once you’ve typed/pasted this code in your config file, press Esc to stop inserting. Then type a colon : and then type wq to write and quit the editor.
  
-**Check that Jupyter Notebook is working**
+**Check that Jupyter Notebook is working with spark**
 
 You should now have everything set up to launch Juptyer notebook with Spark! Run:
 ```console
@@ -300,17 +299,19 @@ You’ll see an output saying that a jupyter notebook is running at all ip addre
 https://ec2-xx-xx-xxx-xxx.us-west-2.compute.amazonaws.com:8888
 ```
 After putting that into your browser you’ll probably get a warning of an untrusted certificate, go ahead and click through that and connect anyway, you trust the site. (Hopefully, after all you are the one that made it!)
-
-You should be able to see Jupyter Notebook running on you EC2 instance. Great!Use Crtl-C in your EC2 Ubuntu console to kill the Jupyter Notebook process. Clear the console with clear
-
-Then as previously done, connect through your browser again to your instance’s Jupyter Notebook. Launch a new notebook and in a notebook cell type:
-
+To access the notebook, copy and paste one of these URLs in the browser and run the below code line by line in jupyter notebook:
 ```console
-from pyspark import SparkContext
-sc = SparkContext()
+import pyspark
+import findspark
+findspark.init('/home/ubuntu/spark-3.2.2-bin-hadoop2.7') 
+from pyspark.sql import SparkSession 
+spark = SparkSession.builder.appName('myApp').getOrCreate() 
+df = spark.read.json('test.json') 
+df.show()
 ```
 
 If that works, you’re all done!
+
 ### Clean up resources
 
 Run `terraform destroy` to delete all resources created.
