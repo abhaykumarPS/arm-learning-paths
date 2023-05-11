@@ -223,8 +223,8 @@ Master_public_IP = [
 ]
 
 ```
-## Configure Spark
-**Login to the deployed instance, using SSH to the public IP of the AWS EC2 instance..**
+## Configure Spark manually
+Login to the deployed instance, using SSH to the public IP of the AWS EC2 instance.
 
 ``` console
 ssh ubuntu@Master_public_IP
@@ -285,8 +285,69 @@ Press i on your keyboard to activate -INSERT-. Then at the top of the file type:
  c.NotebookApp.open_browser = False
  ```
  Once you’ve typed/pasted this code in your config file, press Esc to stop inserting. Then type a colon : and then type wq to write and quit the editor.
- 
-**Check that Jupyter Notebook is working with spark**
+
+## Configure spark by Ansible
+
+```console
+---
+- name: spark config
+  hosts: all
+  become: true
+  become_user: root
+  become_method: sudo
+
+  tasks:
+    - name: Update the Machine & Install Dependencies
+      shell: sudo apt-get update
+    - name: Update apt repo and cache on all Debian/Ubuntu boxes
+      apt:  upgrade=yes update_cache=yes force_apt_get=yes cache_valid_time=3600
+      become: true
+    - name: Install Python pip & Python package
+      apt: name={{ item }} update_cache=true state=present force_apt_get=yes
+      with_items:
+      - python3-pip
+      become: true
+    - name: Install jupyter
+      shell: pip3 install jupyter
+    - name: Install Notebook
+      shell: pip install notebook
+    - name: Install Java and related Dependencies
+      shell: sudo apt-get install -y default-jre default-jdk vim wget
+    - name: Install scala
+      shell: sudo apt-get install -y scala
+    - name: Update the Machine & Install Dependencies
+      shell: pip3 install py4j
+    - name: Install openssl
+      shell: sudo apt install openssl -y
+    - name: Install spark
+      shell: pip3 install findspark
+    - name: Install findspark
+      shell: pip3 install pyspark
+    - name: Install and extract spark binary
+      shell: |
+              sudo wget https://archive.apache.org/dist/spark/spark-3.2.2/spark-3.2.2-bin-hadoop2.7.tgz
+              sudo tar -zxvf spark-3.2.2-bin-hadoop2.7.tgz
+    - name: install pipenv
+      shell: pip3 install pipenv
+    - name: configure
+      shell: jupyter notebook --generate-config
+
+    - name: Create directory and config Jupyter notebook
+      shell: |
+              mkdir cert
+              cd cert
+              sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mycert.pem -out mycert.pem -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com/E=abh@gmail.com"
+    - name: Edit Configuration File
+      lineinfile:
+        path: /root/.jupyter/jupyter_notebook_config.py
+        line: |
+               c.NotebookApp.certfile = u'/home/ubuntu/cert/mycert.pem'
+               c.NotebookApp.ip = '*'
+               c.NotebookApp.port = 8888
+               c.NotebookApp.open_browser = False
+        insertafter: c = get_config()  #noqa
+```
+## Check that Jupyter Notebook is working with spark
 
 You should now have everything set up to launch Juptyer notebook with Spark! Run:
 ```console
