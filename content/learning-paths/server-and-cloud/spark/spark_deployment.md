@@ -447,7 +447,7 @@ spark = SparkSession.builder.appName('myApp').getOrCreate()
 df = spark.read.json('test.json') 
 df.show()
 ```
-**Note:** Before run the above code, you can create a test.json file with below code in ec2 instance.
+{{% notice Note %}} Before run the above code, you can create a test.json file with below code in ec2 instance.{{% /notice %}}
 
 ```console
    {"country":"singapur"}
