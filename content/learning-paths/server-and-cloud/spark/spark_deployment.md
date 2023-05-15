@@ -447,6 +447,13 @@ spark = SparkSession.builder.appName('myApp').getOrCreate()
 df = spark.read.json('test.json') 
 df.show()
 ```
+**Note:** Before run the above code, you can create a test.json file with below code in ec2 instance.
+
+```console
+   {"country":"singapur"}
+   {"country":"india","capital":"new delhi"}
+   {"country":"uk"},"capital":"london","population":"78M"}
+```
 
 If that works, you’re all done!
 
