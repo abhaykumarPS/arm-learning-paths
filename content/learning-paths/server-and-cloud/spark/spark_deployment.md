@@ -318,8 +318,6 @@ Using a text editor, save the code below to in a file called `spark.yaml`. It wi
       become: true
     - name: Install jupyter
       shell: pip3 install jupyter
-    - name: Install Notebook
-      shell: pip install notebook
     - name: Install Java and related Dependencies
       shell: sudo apt-get install -y default-jre default-jdk vim wget
     - name: Install scala
@@ -330,31 +328,41 @@ Using a text editor, save the code below to in a file called `spark.yaml`. It wi
       shell: sudo apt install openssl -y
     - name: Install spark
       shell: pip3 install findspark
-    - name: Install findspark
-      shell: pip3 install pyspark
     - name: Install and extract spark binary
       shell: |
               sudo wget https://archive.apache.org/dist/spark/spark-3.2.2/spark-3.2.2-bin-hadoop2.7.tgz
               sudo tar -zxvf spark-3.2.2-bin-hadoop2.7.tgz
-    - name: install pipenv
-      shell: pip3 install pipenv
-    - name: configure
-      shell: jupyter notebook --generate-config
+    - name: configure jupyter notebook
+      shell: |
+              sudo mv /root/.jupyter /home/ubuntu/
+              sudo chown $USER:$USER /home/ubuntu/.jupyter/
+              sudo chmod 777 /home/ubuntu/.jupyter/
 
     - name: Create directory and config Jupyter notebook
       shell: |
               mkdir cert
+              jupyter notebook --generate-config
               cd cert
               sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mycert.pem -out mycert.pem -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com/E=abh@gmail.com"
+              sudo chown $USER:$USER /home/ubuntu/cert/mycert.pem
+              sudo chmod 777 /home/ubuntu/cert/mycert.pem
     - name: Edit Configuration File
       lineinfile:
-        path: /root/.jupyter/jupyter_notebook_config.py
+        path: /home/ubuntu/.jupyter/jupyter_notebook_config.py
         line: |
                c.NotebookApp.certfile = u'/home/ubuntu/cert/mycert.pem'
                c.NotebookApp.ip = '*'
                c.NotebookApp.port = 8888
                c.NotebookApp.open_browser = False
         insertafter: c = get_config()  #noqa
+    - name: Creating a json file
+      copy:
+        dest: /home/ubuntu/test.json
+        content: |
+             {"country":"singapur"}
+             {"country":"india","capital":"new delhi"}
+             {"country":"uk"},"capital":"london","population":"78M"}
+
 ```
 ## Ansible Commands
 Run the playbook using the `ansible-playbook` command:
