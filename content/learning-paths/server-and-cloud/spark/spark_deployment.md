@@ -444,10 +444,9 @@ After putting that into your browser you’ll probably get a interface as showin
 
 Now, you can on the new and then click on Python3 (ipykernel) for accesing the jupyter notebook:
 
-j2](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/bf252f37-a3e4-4d7a-91bf-cd7583a8aa63)
+![j2](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/bf252f37-a3e4-4d7a-91bf-cd7583a8aa63)
 
 Now, Run the below code line by line in jupyter notebook:
-![j4](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/ba278cb3-02e0-4004-907d-fe0caeb0fba5)
 
 ```console
 import pyspark
@@ -458,13 +457,8 @@ spark = SparkSession.builder.appName('myApp').getOrCreate()
 df = spark.read.json('test.json') 
 df.show()
 ```
-{{% notice Note %}} Before run the above code, you can create a test.json file with below code in ec2 instance.{{% /notice %}}
+![j4](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/ba278cb3-02e0-4004-907d-fe0caeb0fba5)
 
-```console
-   {"country":"singapur"}
-   {"country":"india","capital":"new delhi"}
-   {"country":"uk"},"capital":"london","population":"78M"}
-```
 
 If that works, you’re all done!
 
