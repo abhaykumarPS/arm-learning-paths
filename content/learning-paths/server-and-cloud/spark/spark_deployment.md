@@ -9,11 +9,10 @@ layout: "learningpathall"
 ---
 
 ##  Deploy a single node of Spark 
+Apache Spark is an open-source, distributed processing system used for big data workloads. It utilizes in-memory caching and optimized query execution for fast queries against data of any size. Simply put, Spark is a fast and general engine for large-scale data processing.
 
 You can deploy Spark on AWS Graviton processors using Terraform. 
-
 In this topic, you will deploy Sparek on a single AWS EC2 instance. 
-
 If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws/terraform/) before starting this Learning Path.
 
 ## Before you begin
@@ -279,12 +278,20 @@ You should see a bunch of commented Python code, this is where you can either un
 
 Press i on your keyboard to activate -INSERT-. Then at the top of the file type:
 ```console
- c.NotebookApp.certfile = u'/home/ubuntu/certs/mycert.pem'
+ c.NotebookApp.certfile = u'/home/ubuntu/cert/mycert.pem'
  c.NotebookApp.ip = '*' 
  c.NotebookApp.port = 8888 
  c.NotebookApp.open_browser = False
  ```
  Once you’ve typed/pasted this code in your config file, press Esc to stop inserting. Then type a colon : and then type wq to write and quit the editor.
+
+Last, you can create a dummy file for checking that saprk is working or not:
+ 
+ ```console
+{"country":"singapur"}
+{"country":"india","capital":"new delhi"}
+{"country":"uk"},"capital":"london","population":"78M"}
+```
 
 {{% notice Note %}} You can follow the above mentioned steps for configuring spark manually or you can follow the below ansible steps for coniguration of spark in aws ec2 instance. {{% /notice %}}
 
@@ -352,7 +359,7 @@ Using a text editor, save the code below to in a file called `spark.yaml`. It wi
 ## Ansible Commands
 Run the playbook using the `ansible-playbook` command:
 ```console
-ansible-playbook zookeeper_cluster.yaml -i /tmp/inventory
+ansible-playbook spark.yaml -i /tmp/inventory
 ```
 Answer yes when prompted for the SSH connection.
 
@@ -442,8 +449,7 @@ https://ec2-xx-xx-xxx-xxx.us-west-2.compute.amazonaws.com:8888
 After putting that into your browser you’ll probably get a interface as showing below:
 ![j1](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/9f6de356-c93e-4189-9bc3-d45b04209f85)
 
-Now, you can on the new and then click on Python3 (ipykernel) for accesing the jupyter notebook:
-
+Now, you can click on the new and then click on Python3 (ipykernel) for accesing the jupyter notebook:
 ![j2](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/bf252f37-a3e4-4d7a-91bf-cd7583a8aa63)
 
 Now, Run the below code line by line in jupyter notebook:
@@ -457,8 +463,8 @@ spark = SparkSession.builder.appName('myApp').getOrCreate()
 df = spark.read.json('test.json') 
 df.show()
 ```
+bElow is the interface of jupyter notebook:
 ![j4](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/ba278cb3-02e0-4004-907d-fe0caeb0fba5)
-
 
 If that works, you’re all done!
 
@@ -470,4 +476,3 @@ Run `terraform destroy` to delete all resources created.
 terraform destroy
 ```
 
-Continue the Learning Path to create a multi-node PostgreSQL deployment. 
