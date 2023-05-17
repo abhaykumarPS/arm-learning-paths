@@ -361,7 +361,7 @@ Using a text editor, save the code below to in a file called `spark.yaml`. It wi
         content: |
              {"country":"singapur"}
              {"country":"india","capital":"new delhi"}
-             {"country":"uk"},"capital":"london","population":"78M"}
+             {"country":"uk","capital":"london","population":"78M"}
 
 ```
 ## Ansible Commands
