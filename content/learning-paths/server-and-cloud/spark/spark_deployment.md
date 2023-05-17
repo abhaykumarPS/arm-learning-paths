@@ -12,7 +12,7 @@ layout: "learningpathall"
 Apache Spark is an open-source, distributed processing system used for big data workloads. It utilizes in-memory caching and optimized query execution for fast queries against data of any size. Simply put, Spark is a fast and general engine for large-scale data processing.
 
 You can deploy Spark on AWS Graviton processors using Terraform. 
-In this topic, you will deploy Sparek on a single AWS EC2 instance. 
+In this topic, you will deploy Spark on a single AWS EC2 instance. 
 If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws/terraform/) before starting this Learning Path.
 
 ## Before you begin
@@ -230,7 +230,7 @@ ssh ubuntu@Master_public_IP
 ```
 **Installation of required dependencies on AWS EC2 instance.**
 
-For deploying spark on aws graviton2, we need to install below tools and depencies on our ec2 instance
+For deploying spark on aws graviton2, we need to install below tools and dependencies on our ec2 instance
 ```console
 sudo apt-get update 
 sudo apt install python3-pip 
@@ -243,7 +243,7 @@ pip3 install pyspark
  ```
  **Install and extract spark binary:**
  
- We need to install spark binary on aur ec2 instance by followed below command .
+ We need to install spark binary on our ec2 instance by followed below command .
  ```console
  sudo wget https://archive.apache.org/dist/spark/spark-3.2.2/spark-3.2.2-bin-hadoop2.7.tgz
  sudo tar -zxvf spark-3.2.2-bin-hadoop2.7.tgz
@@ -285,7 +285,7 @@ Press i on your keyboard to activate -INSERT-. Then at the top of the file type:
  ```
  Once you’ve typed/pasted this code in your config file, press Esc to stop inserting. Then type a colon : and then type wq to write and quit the editor.
 
-Last, you can create a dummy file for checking that saprk is working or not:
+Last, you can create a dummy file for checking that Spark is working or not:
  
  ```console
 {"country":"singapur"}
@@ -293,7 +293,7 @@ Last, you can create a dummy file for checking that saprk is working or not:
 {"country":"uk"},"capital":"london","population":"78M"}
 ```
 
-{{% notice Note %}} You can follow the above mentioned steps for configuring spark manually or you can follow the below ansible steps for coniguration of spark in aws ec2 instance. {{% /notice %}}
+{{% notice Note %}} You can follow the above mentioned steps for configuring spark manually or you can follow the below ansible steps for configuration of spark in aws ec2 instance. {{% /notice %}}
 
 ## Configure spark by Ansible
 Using a text editor, save the code below to in a file called `spark.yaml`. It will install the Spark and the required dependencies. This is the YAML file for the Ansible playbook.
@@ -457,7 +457,7 @@ https://ec2-xx-xx-xxx-xxx.us-west-2.compute.amazonaws.com:8888
 After putting that into your browser you’ll probably get a interface as showing below:
 ![j1](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/9f6de356-c93e-4189-9bc3-d45b04209f85)
 
-Now, you can click on the new and then click on Python3 (ipykernel) for accesing the jupyter notebook:
+Now, you can click on the new and then click on Python3 (ipykernel) for accessing the jupyter notebook:
 ![j2](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/bf252f37-a3e4-4d7a-91bf-cd7583a8aa63)
 
 Now, Run the below code line by line in jupyter notebook:
@@ -471,7 +471,7 @@ spark = SparkSession.builder.appName('myApp').getOrCreate()
 df = spark.read.json('test.json') 
 df.show()
 ```
-bElow is the interface of jupyter notebook:
+below is the interface of jupyter notebook:
 ![j4](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/ba278cb3-02e0-4004-907d-fe0caeb0fba5)
 
 If that works, you’re all done!
