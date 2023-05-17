@@ -430,14 +430,25 @@ You should now have everything set up to launch Juptyer notebook with Spark! Run
 ```console
 jupyter notebook
 ```
+The below interface is shown in terminal after applying `jupyter notebook` command
+
+![image](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/b56893c2-6ce4-4b05-b00c-4aab2b845565)
 
 You’ll see an output saying that a jupyter notebook is running at all ip addresses at port 8888. Go to your own web browser (Google Chrome suggested) and type in your Public DNS for your Amazon EC2 instance followed by :8888. It should be in the form:
 
 ```console
 https://ec2-xx-xx-xxx-xxx.us-west-2.compute.amazonaws.com:8888
 ```
-After putting that into your browser you’ll probably get a warning of an untrusted certificate, go ahead and click through that and connect anyway, you trust the site. (Hopefully, after all you are the one that made it!)
-Run the below code line by line in jupyter notebook:
+After putting that into your browser you’ll probably get a interface as showing below:
+![j1](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/9f6de356-c93e-4189-9bc3-d45b04209f85)
+
+Now, you can on the new and then click on Python3 (ipykernel) for accesing the jupyter notebook:
+
+j2](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/bf252f37-a3e4-4d7a-91bf-cd7583a8aa63)
+
+Now, Run the below code line by line in jupyter notebook:
+![j4](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/ba278cb3-02e0-4004-907d-fe0caeb0fba5)
+
 ```console
 import pyspark
 import findspark
