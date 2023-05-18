@@ -223,14 +223,15 @@ Master_public_IP = [
 
 ```
 ## Configure Spark manually
+**SSH to the instance:**
 Login to the deployed instance, using SSH to the public IP of the AWS EC2 instance.
 
 ``` console
 ssh ubuntu@Master_public_IP
 ```
-**Installation of required dependencies on AWS EC2 instance.**
+**Installation of required dependencies on AWS EC2 instance:**
 
-For deploying spark on aws graviton2, we need to install below tools and dependencies on our ec2 instance
+For deploying Spark on aws graviton2, we need to install below tools and dependencies on our ec2 instance
 ```console
 sudo apt-get update 
 sudo apt install python3-pip 
@@ -241,14 +242,14 @@ pip3 install py4j
 pip3 install findspark
 pip3 install pyspark
  ```
- **Install and extract spark binary:**
+ **Install and extract Spark binary:**
  
- We need to install spark binary on our ec2 instance by followed below command .
+ We need to install Spark binary on our ec2 instance by followed below command .
  ```console
  sudo wget https://archive.apache.org/dist/spark/spark-3.2.2/spark-3.2.2-bin-hadoop2.7.tgz
  sudo tar -zxvf spark-3.2.2-bin-hadoop2.7.tgz
 ```
-**config Jupyter notebook:**
+**Config Jupyter notebook:**
 
 Jupyter comes with Anaconda, but we will need to configure it in order to use it through EC2 and connect with SSH. Go ahead and generate a configuration file for Jupyter using:
 ```console
@@ -290,12 +291,12 @@ Last, you can create a dummy file for checking that Spark is working or not:
  ```console
 {"country":"singapur"}
 {"country":"india","capital":"new delhi"}
-{"country":"uk"},"capital":"london","population":"78M"}
+{"country":"uk","capital":"london","population":"78M"}
 ```
 
 {{% notice Note %}} You can follow the above mentioned steps for configuring spark manually or you can follow the below ansible steps for configuration of spark in aws ec2 instance. {{% /notice %}}
 
-## Configure spark by Ansible
+## Configure Spark by Ansible
 Using a text editor, save the code below to in a file called `spark.yaml`. It will install the Spark and the required dependencies. This is the YAML file for the Ansible playbook.
 ```console
 ---
@@ -355,7 +356,7 @@ Using a text editor, save the code below to in a file called `spark.yaml`. It wi
                c.NotebookApp.port = 8888
                c.NotebookApp.open_browser = False
         insertafter: c = get_config()  #noqa
-    - name: Creating a json file
+    - name: Creating a dummy .json file
       copy:
         dest: /home/ubuntu/test.json
         content: |
