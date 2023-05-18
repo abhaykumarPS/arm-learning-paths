@@ -455,10 +455,10 @@ You’ll see an output saying that a jupyter notebook is running at all ip addre
 https://ec2-xx-xx-xxx-xxx.us-west-2.compute.amazonaws.com:8888
 ```
 After putting that into your browser you’ll probably get a interface as showing below:
-![j1](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/9f6de356-c93e-4189-9bc3-d45b04209f85)
+![spark1](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/f714bd0e-ff11-4446-af87-61f7e58f8824)
 
 Now, you can click on the new and then click on Python3 (ipykernel) for accessing the jupyter notebook:
-![j2](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/bf252f37-a3e4-4d7a-91bf-cd7583a8aa63)
+![spark2](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/50fd6d68-77e9-4e83-b270-1c4efb7c6351)
 
 Now, Run the below code line by line in jupyter notebook:
 
@@ -472,7 +472,7 @@ df = spark.read.json('test.json')
 df.show()
 ```
 below is the interface of jupyter notebook:
-![j4](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/ba278cb3-02e0-4004-907d-fe0caeb0fba5)
+![spark3](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/516566b3-59c0-47b7-8100-7e5c9aa2855f)
 
 If that works, you’re all done!
 
