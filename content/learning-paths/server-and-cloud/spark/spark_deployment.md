@@ -449,10 +449,11 @@ The below interface is shown in terminal after applying `jupyter notebook` comma
 
 ![image](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/b56893c2-6ce4-4b05-b00c-4aab2b845565)
 
-You’ll see an output saying that a jupyter notebook is running at all ip addresses at port 8888. Go to your own web browser (Google Chrome suggested) and type in your Public DNS for your Amazon EC2 instance followed by :8888. It should be in the form:
+You’ll see an output saying that a jupyter notebook is running at all ip addresses at port 8888. Go to your own web browser and type in your Public DNS for your Amazon EC2 instance followed by :8888. It should be in the form:
 
 ```console
-https://ec2-xx-xx-xxx-xxx.us-west-2.compute.amazonaws.com:8888
+https://<Public_DNS_Of_Your_Ec2_instance>:8888/?token=f5d44e8faa19f9b08bd3820e700666f176e75920cc5571a3
+
 ```
 After putting that into your browser you’ll probably get a interface as showing below:
 ![spark1](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/f714bd0e-ff11-4446-af87-61f7e58f8824)
