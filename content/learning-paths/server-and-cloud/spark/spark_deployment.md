@@ -290,9 +290,9 @@ Press i on your keyboard to activate -INSERT-. Then at the top of the file type:
 Last, you can create a dummy file for checking that Spark is working or not:
  
  ```console
-{"country":"singapur"}
-{"country":"india","capital":"new delhi"}
-{"country":"uk","capital":"london","population":"78M"}
+{"Country":"Singapore"}
+{"country":"India","capital":"New Delhi"}
+{"country":"UK","Capital":"London","Population":"78M"}
 ```
 
 {{% notice Note %}} You can follow the above mentioned steps for configuring spark manually or you can follow the below ansible steps for configuration of spark in aws ec2 instance. {{% /notice %}}
@@ -361,9 +361,9 @@ Using a text editor, save the code below to in a file called `spark.yaml`. It wi
       copy:
         dest: /home/ubuntu/test.json
         content: |
-             {"country":"singapur"}
-             {"country":"india","capital":"new delhi"}
-             {"country":"uk","capital":"london","population":"78M"}
+             {"Country":"Singapore"}
+             {"Country":"India","Capital":"New Delhi"}
+             {"Country":"UK","Capital":"london","Population":"78M"}
 
 ```
 ## Ansible Commands
