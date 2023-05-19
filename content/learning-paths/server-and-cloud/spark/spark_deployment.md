@@ -346,7 +346,6 @@ Using a text editor, save the code below to in a file called `spark.yaml`. It wi
     - name: Create directory and config Jupyter notebook
       shell: |
               mkdir cert
-              jupyter notebook --generate-config
               cd cert
               sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mycert.pem -out mycert.pem -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com/E=abh@gmail.com"
               sudo chown $USER:$USER /home/ubuntu/cert/mycert.pem
