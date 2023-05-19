@@ -234,11 +234,12 @@ ssh ubuntu@Master_public_IP
 
 For deploying Spark on aws graviton2, we need to install below tools and dependencies on our ec2 instance
 ```console
-sudo apt-get update 
-sudo apt install python3-pip 
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt install python3-pip -y
 pip3 install jupyter 
-sudo apt-get install default-jre 
-sudo apt-get install scala 
+sudo apt-get install default-jre -y 
+sudo apt-get install scala -y
 pip3 install py4j
 pip3 install findspark
 pip3 install pyspark
