@@ -57,7 +57,7 @@ provider "aws" {
   region = "us-east-2"
 }
 resource "aws_instance" "Spark_TEST" {
-  ami           = "ami-0f9bd9098aca2d42b"
+  ami           = "ami-0ca2eafa23bc3dd01"
   instance_type = "t4g.small"
   security_groups= [aws_security_group.Terraformsecurity.name]
   key_name = aws_key_pair.deployer.key_name
