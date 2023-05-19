@@ -337,10 +337,12 @@ Using a text editor, save the code below to in a file called `spark.yaml`. It wi
               sudo tar -zxvf spark-3.2.2-bin-hadoop2.7.tgz
     - name: configure jupyter notebook
       shell: |
+              jupyter notebook --generate-config
+    - name: Change file path and assigned priveledges
+      shell: |
               sudo mv /root/.jupyter /home/ubuntu/
               sudo chown $USER:$USER /home/ubuntu/.jupyter/
               sudo chmod 777 /home/ubuntu/.jupyter/
-
     - name: Create directory and config Jupyter notebook
       shell: |
               mkdir cert
@@ -348,7 +350,7 @@ Using a text editor, save the code below to in a file called `spark.yaml`. It wi
               cd cert
               sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mycert.pem -out mycert.pem -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com/E=abh@gmail.com"
               sudo chown $USER:$USER /home/ubuntu/cert/mycert.pem
-              sudo chmod 777 /home/ubuntu/cert/mycert.pem
+              sudo chmod 777 /home/ubuntu/cert/mycert.pem  
     - name: Edit Configuration File
       lineinfile:
         path: /home/ubuntu/.jupyter/jupyter_notebook_config.py
