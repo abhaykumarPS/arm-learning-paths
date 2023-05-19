@@ -260,6 +260,7 @@ Jupyter comes with Anaconda, but we will need to configure it in order to use it
 
 We can also create certifications for our connections in the form of .pem files. Perform the following:
 ```console
+ mkdir cert/
  cd cert/
  sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mycert.pem -out mycert.pem
 ```
@@ -285,14 +286,14 @@ Press i on your keyboard to activate -INSERT-. Then at the top of the file type:
  c.NotebookApp.port = 8888 
  c.NotebookApp.open_browser = False
  ```
- Once you’ve typed/pasted this code in your config file, press Esc to stop inserting. Then type a colon : and then type wq to write and quit the editor.
+Once you’ve typed/pasted this code in your config file, press Esc to stop inserting. Then type a colon : and then type wq to write and quit the editor.
 
 Last, you can create a dummy file for checking that Spark is working or not:
  
  ```console
 {"Country":"Singapore"}
-{"country":"India","capital":"New Delhi"}
-{"country":"UK","Capital":"London","Population":"78M"}
+{"Country":"India","Capital":"New Delhi"}
+{"Country":"UK","Capital":"London","Population":"78M"}
 ```
 
 {{% notice Note %}} You can follow the above mentioned steps for configuring spark manually or you can follow the below ansible steps for configuration of spark in aws ec2 instance. {{% /notice %}}
@@ -474,7 +475,7 @@ df = spark.read.json('test.json')
 df.show()
 ```
 below is the interface of jupyter notebook:
-![spark3](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/516566b3-59c0-47b7-8100-7e5c9aa2855f)
+![image](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/771d3b28-5246-425b-8b0a-665d65663b7e)
 
 If that works, you’re all done!
 
