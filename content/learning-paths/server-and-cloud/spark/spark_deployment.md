@@ -124,7 +124,7 @@ output "Master_public_IP" {
   }
 // Generate inventory file
 resource "local_file" "inventory" {
-    depends_on= [aws_instance.PSQL_TEST]
+    depends_on= [aws_instance.Spark_TEST]
     filename = "/tmp/inventory"
     content = <<EOF
           [db_master]
@@ -295,7 +295,7 @@ Last, you can create a dummy file for checking that Spark is working or not:
 {"Country":"India","Capital":"New Delhi"}
 {"Country":"UK","Capital":"London","Population":"78M"}
 ```
-
+Spark is configure successfully and 
 {{% notice Note %}} You can follow the above mentioned steps for configuring spark manually or you can follow the below ansible steps for configuration of spark in aws ec2 instance. {{% /notice %}}
 
 ## Configure Spark by Ansible
