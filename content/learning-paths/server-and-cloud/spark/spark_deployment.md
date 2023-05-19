@@ -288,14 +288,15 @@ Press i on your keyboard to activate -INSERT-. Then at the top of the file type:
  ```
 Once you’ve typed/pasted this code in your config file, press Esc to stop inserting. Then type a colon : and then type wq to write and quit the editor.
 
-Last, you can create a dummy file for checking that Spark is working or not:
+Last, you can create a dummy file(.json) for checking that Spark is working or not:
  
  ```console
 {"Country":"Singapore"}
 {"Country":"India","Capital":"New Delhi"}
 {"Country":"UK","Capital":"London","Population":"78M"}
 ```
-Spark is configure successfully and 
+Now you can follow [this](https://github.com/abhaykumarPS/arm-learning-paths/edit/main/content/learning-paths/server-and-cloud/spark/spark_deployment.md#check-that-jupyter-notebook-is-working-with-spark) to Check that Jupyter Notebook is working with spark
+
 {{% notice Note %}} You can follow the above mentioned steps for configuring spark manually or you can follow the below ansible steps for configuration of spark in aws ec2 instance. {{% /notice %}}
 
 ## Configure Spark by Ansible
