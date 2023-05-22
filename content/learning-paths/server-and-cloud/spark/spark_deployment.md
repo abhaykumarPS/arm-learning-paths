@@ -134,7 +134,7 @@ Make the changes listed below in `main.tf` to match your account settings.
 2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm in the us-east-2 region is `ami-0f9bd9098aca2d42b ` No change is needed if you want to use Ubuntu AMI in us-east-1. The AMI ID values are region specific and need to be changed if you use another AWS region. Use the AWS EC2 console to find an AMI ID or refer to [Find a Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html).
 
 {{% notice Note %}}
-The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
+The instance type is t4g.small. This is an Arm-based instance and requires an Arm Linux distribution.
 {{% /notice %}}
 
 The inventory file is automatically generated and does not need to be changed.
@@ -223,7 +223,7 @@ ssh ubuntu@Master_public_IP
 ```
 **Installation of required dependencies on AWS EC2 instance**
 
-For deploying Spark on aws graviton2, we need to install below tools and dependencies on our ec2 instance:
+For deploying Spark on AWS graviton2, we need to to install below tools and dependencies on our EC2 instance:
 ```console
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -237,7 +237,7 @@ pip3 install pyspark
  ```
  **Install and extract Spark binary**
  
- We need to install Spark binary on our ec2 instance by followed below command:
+ We can install Spark binary on our EC2 instance using below commands:
  ```console
  sudo wget https://archive.apache.org/dist/spark/spark-3.2.2/spark-3.2.2-bin-hadoop2.7.tgz
  sudo tar -zxvf spark-3.2.2-bin-hadoop2.7.tgz
@@ -261,9 +261,9 @@ Perform the following:
 You’ll get asked some general questions after running that last line. Just fill them out with some general information.
 {{% /notice %}}
 
-**Change the file owner or change directory permissions**
+**Change the file owner or directory permissions**
 
-To give read, write, and execute permissions for everyone:
+To give read, write and execute permissions for everyone:
 ```console
 sudo chown $USER:$USER /home/ubuntu/cert/mycert.pem
 sudo chmod 777 /home/ubuntu/cert/mycert.pem  
@@ -290,7 +290,7 @@ c.NotebookApp.open_browser = False
  ```
 Once you’ve typed/pasted this code in your config file, save your file and quit the editor.
 
-Lastly, create a dummy file(.json) for checking that Spark is working or not:
+Lastly, create a dummy file(.json) for checking whether Spark is working or not:
  
  ```console
 {"Country":"Singapore"}
@@ -299,10 +299,10 @@ Lastly, create a dummy file(.json) for checking that Spark is working or not:
 ```
 Now follow [this](/learning-paths/server-and-cloud/spark/spark_deployment#check-that-jupyter-notebook-is-working-with-spark) to Check that Jupyter Notebook is working with spark.
 
-{{% notice Note %}} Follow the above mentioned steps for configuring Spark manually or follow the below ansible steps for configuration of Spark in aws ec2 instance. {{% /notice %}}
+{{% notice Note %}} Follow the above mentioned steps for configuring Spark manually or follow the below ansible steps for configuration of Spark in AWS EC2 instance. {{% /notice %}}
 
 ## Configure Spark by Ansible
-Using a text editor, save the code below to in a file called `spark.yaml`. It will install the Spark and the required dependencies. This is the YAML file for the Ansible playbook.
+Using a text editor, save the code below to a file called `spark.yaml`. It will install the Spark and the required dependencies. This is the YAML file for the Ansible playbook.
 ```console
 ---
 - name: spark config
@@ -461,7 +461,7 @@ You’ll see an output saying that a jupyter notebook is running at all IP addre
 https://<Public_DNS_Of_Your_Ec2_instance>:8888/?token=f5d44e8faa19f9b08bd3820e700666f176e75920cc5571a3
 
 ```
-After putting that into the browser an interface as shown below will be seen:
+After putting that into the browser, an interface as shown below will be seen:
 
 ![spark1](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/f714bd0e-ff11-4446-af87-61f7e58f8824)
 
