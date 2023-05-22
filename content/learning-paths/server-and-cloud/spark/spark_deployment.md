@@ -299,7 +299,7 @@ Lastly, create a dummy file(.json) for checking that Spark is working or not:
 ```
 Now follow [this](/learning-paths/server-and-cloud/spark/spark_deployment#check-that-jupyter-notebook-is-working-with-spark) to Check that Jupyter Notebook is working with spark.
 
-{{% notice Note %}} Follow the above mentioned steps for configuring spark manually or follow the below ansible steps for configuration of spark in aws ec2 instance. {{% /notice %}}
+{{% notice Note %}} Follow the above mentioned steps for configuring Spark manually or follow the below ansible steps for configuration of Spark in aws ec2 instance. {{% /notice %}}
 
 ## Configure Spark by Ansible
 Using a text editor, save the code below to in a file called `spark.yaml`. It will install the Spark and the required dependencies. This is the YAML file for the Ansible playbook.
