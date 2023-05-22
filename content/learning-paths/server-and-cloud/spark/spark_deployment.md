@@ -261,6 +261,13 @@ Perform the following:
 You’ll get asked some general questions after running that last line. Just fill them out with some general information.
 {{% /notice %}}
 
+**Change the file owner or change directory permissions**
+
+To give read, write, and execute permissions for everyone:
+```console
+sudo chown $USER:$USER /home/ubuntu/cert/mycert.pem
+sudo chmod 777 /home/ubuntu/cert/mycert.pem  
+```
 **Edit Configuration File**
 
 Next, we need to finish editing the Jupyter Configuration file we created earlier. Change directory to:
