@@ -214,14 +214,14 @@ Master_public_IP = [
 
 ```
 ## Configure Spark manually
-**SSH to the instance:**
+**SSH to the instance**
 
 Login to the deployed instance, using SSH to the public IP of the AWS EC2 instance.
 
 ``` console
 ssh ubuntu@Master_public_IP
 ```
-**Installation of required dependencies on AWS EC2 instance:**
+**Installation of required dependencies on AWS EC2 instance**
 
 For deploying Spark on aws graviton2, we need to install below tools and dependencies on our ec2 instance:
 ```console
@@ -235,20 +235,20 @@ pip3 install py4j
 pip3 install findspark
 pip3 install pyspark
  ```
- **Install and extract Spark binary:**
+ **Install and extract Spark binary**
  
- We need to install Spark binary on our ec2 instance by followed below command .
+ We need to install Spark binary on our ec2 instance by followed below command:
  ```console
  sudo wget https://archive.apache.org/dist/spark/spark-3.2.2/spark-3.2.2-bin-hadoop2.7.tgz
  sudo tar -zxvf spark-3.2.2-bin-hadoop2.7.tgz
 ```
-**Config Jupyter notebook:**
+**Config Jupyter notebook**
 
 Jupyter comes with Anaconda, but we will need to configure it in order to use it through EC2 and connect with SSH. Generate a configuration file for Jupyter using:
 ```console
  jupyter notebook --generate-config
 ```
-**Create Certifications:**
+**Create Certifications**
 
 We can also create certifications for our connections in the form of .pem files. 
 Perform the following:
@@ -261,7 +261,7 @@ Perform the following:
 You’ll get asked some general questions after running that last line. Just fill them out with some general information.
 {{% /notice %}}
 
-**Edit Configuration File:**
+**Edit Configuration File**
 
 Next we need to finish editing the Jupyter Configuration file we created earlier. Change directory to:
 
@@ -290,7 +290,7 @@ Lastly, create a dummy file(.json) for checking that Spark is working or not:
 {"Country":"India","Capital":"New Delhi"}
 {"Country":"UK","Capital":"London","Population":"78M"}
 ```
-Now follow [this](/learning-paths/server-and-cloud/spark/spark_deployment#check-that-jupyter-notebook-is-working-with-spark) to Check that Jupyter Notebook is working with spark
+Now follow [this](/learning-paths/server-and-cloud/spark/spark_deployment#check-that-jupyter-notebook-is-working-with-spark) to Check that Jupyter Notebook is working with spark.
 
 {{% notice Note %}} Follow the above mentioned steps for configuring spark manually or follow the below ansible steps for configuration of spark in aws ec2 instance. {{% /notice %}}
 
