@@ -36,13 +36,11 @@ The installation of Terraform on your desktop or laptop needs to communicate wit
 To generate and configure the Access key ID and Secret access key, follow this [documentation](/install-guides/aws_access_keys).
 ### Generate an SSH key-pair
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access: 
+Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
 
-```console
-ssh-keygen -f aws_key -t rsa -b 2048 -P ""
-```
-
-You should now have your AWS access keys and your SSH keys in the current directory.
+{{% notice Note %}}
+If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+{{% /notice %}}
 
 ## Create an AWS EC2 instance using Terraform
 
@@ -371,7 +369,7 @@ Run the playbook using the `ansible-playbook` command:
 ```console
 ansible-playbook spark.yaml -i /tmp/inventory
 ```
-Answer **yes** when prompted for the SSH connection.
+Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes.
 
@@ -477,6 +475,7 @@ df.show()
 Below is the interface of jupyter notebook:
 ![image](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/771d3b28-5246-425b-8b0a-665d65663b7e)
 
+You have successfully deployed Spark on an AWS EC2 instance running Graviton processors.
 ### Clean up resources
 
 Run `terraform destroy` to delete all resources created.
