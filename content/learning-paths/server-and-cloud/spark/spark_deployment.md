@@ -460,7 +460,7 @@ You’ll see an output saying that a jupyter notebook is running at all ip addre
 https://<Public_DNS_Of_Your_Ec2_instance>:8888/?token=f5d44e8faa19f9b08bd3820e700666f176e75920cc5571a3
 
 ```
-After putting that into your browser you’ll probably get a interface as showing below:
+After putting that into your browser you’ll probably get an interface as showing below:
 ![spark1](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/f714bd0e-ff11-4446-af87-61f7e58f8824)
 
 Now, you can click on the new and then click on Python3 (ipykernel) for accessing the jupyter notebook:
@@ -469,7 +469,6 @@ Now, you can click on the new and then click on Python3 (ipykernel) for accessin
 Now, Run the below code line by line in jupyter notebook:
 
 ```console
-import pyspark
 import findspark
 findspark.init('/home/ubuntu/spark-3.2.2-bin-hadoop2.7') 
 from pyspark.sql import SparkSession 
