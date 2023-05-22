@@ -473,6 +473,7 @@ df = spark.read.json('test.json')
 df.show()
 ```
 Below is the interface of jupyter notebook:
+
 ![image](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/771d3b28-5246-425b-8b0a-665d65663b7e)
 
 You have successfully deployed Spark on an AWS EC2 instance running Graviton processors.
