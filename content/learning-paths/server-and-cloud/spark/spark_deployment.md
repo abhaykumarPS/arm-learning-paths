@@ -263,7 +263,7 @@ You’ll get asked some general questions after running that last line. Just fil
 
 **Edit Configuration File**
 
-Next we need to finish editing the Jupyter Configuration file we created earlier. Change directory to:
+Next, we need to finish editing the Jupyter Configuration file we created earlier. Change directory to:
 
 ```console
 cd ~/.jupyter/
@@ -440,21 +440,21 @@ First, Log in to the node using SSH:
 ssh ubuntu@Public_ip_of_node
 ```
 
-Now everything is set up to launch Juptyer notebook with Spark! Run:
+Now everything is set up to launch the Juptyer notebook with Spark! Run:
 ```console
 jupyter notebook
 ```
-The below interface will be shown in terminal after applying `jupyter notebook` command:
+The below interface will be shown in the terminal after applying `jupyter notebook` command:
 
 ![image](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/b56893c2-6ce4-4b05-b00c-4aab2b845565)
 
-You’ll see an output saying that a jupyter notebook is running at all ip addresses at port 8888. Go to web browser and type Public DNS of Amazon EC2 instance followed by :8888. It should be in the form:
+You’ll see an output saying that a jupyter notebook is running at all IP addresses at port 8888. Go to a web browser and type Public DNS of Amazon EC2 instance followed by:8888. It should be in the form:
 
 ```console
 https://<Public_DNS_Of_Your_Ec2_instance>:8888/?token=f5d44e8faa19f9b08bd3820e700666f176e75920cc5571a3
 
 ```
-After putting that into browser an interface as shown below will be seen:
+After putting that into the browser an interface as shown below will be seen:
 
 ![spark1](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/f714bd0e-ff11-4446-af87-61f7e58f8824)
 
