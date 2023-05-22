@@ -285,16 +285,16 @@ c.NotebookApp.open_browser = False
  ```
 Once you’ve typed/pasted this code in your config file, save your file and quit the editor.
 
-Lastly, you can create a dummy file(.json) for checking that Spark is working or not:
+Lastly, create a dummy file(.json) for checking that Spark is working or not:
  
  ```console
 {"Country":"Singapore"}
 {"Country":"India","Capital":"New Delhi"}
 {"Country":"UK","Capital":"London","Population":"78M"}
 ```
-Now you can follow [this](/learning-paths/server-and-cloud/spark/spark_deployment#check-that-jupyter-notebook-is-working-with-spark) to Check that Jupyter Notebook is working with spark
+Now follow [this](/learning-paths/server-and-cloud/spark/spark_deployment#check-that-jupyter-notebook-is-working-with-spark) to Check that Jupyter Notebook is working with spark
 
-{{% notice Note %}} You can follow the above mentioned steps for configuring spark manually or you can follow the below ansible steps for configuration of spark in aws ec2 instance. {{% /notice %}}
+{{% notice Note %}} Follow the above mentioned steps for configuring spark manually or follow the below ansible steps for configuration of spark in aws ec2 instance. {{% /notice %}}
 
 ## Configure Spark by Ansible
 Using a text editor, save the code below to in a file called `spark.yaml`. It will install the Spark and the required dependencies. This is the YAML file for the Ansible playbook.
@@ -442,7 +442,7 @@ First, Log in to the node using SSH:
 ssh ubuntu@Public_ip_of_node
 ```
 
-You should now have everything set up to launch Juptyer notebook with Spark! Run:
+Now everything is set up to launch Juptyer notebook with Spark! Run:
 ```console
 jupyter notebook
 ```
@@ -450,17 +450,17 @@ The below interface will be shown in terminal after applying `jupyter notebook` 
 
 ![image](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/b56893c2-6ce4-4b05-b00c-4aab2b845565)
 
-You’ll see an output saying that a jupyter notebook is running at all ip addresses at port 8888. Go to your own web browser and type in your Public DNS for your Amazon EC2 instance followed by :8888. It should be in the form:
+You’ll see an output saying that a jupyter notebook is running at all ip addresses at port 8888. Go to web browser and type Public DNS of Amazon EC2 instance followed by :8888. It should be in the form:
 
 ```console
 https://<Public_DNS_Of_Your_Ec2_instance>:8888/?token=f5d44e8faa19f9b08bd3820e700666f176e75920cc5571a3
 
 ```
-After putting that into your browser you’ll probably get an interface as showing below:
+After putting that into browser an interface as shown below will be seen:
 
 ![spark1](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/f714bd0e-ff11-4446-af87-61f7e58f8824)
 
-Now, you can click on the new and then click on Python3 (ipykernel) for accessing the jupyter notebook:
+Now, click on the new and then on Python3 (ipykernel) for accessing the jupyter notebook:
 
 ![spark2](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/50fd6d68-77e9-4e83-b270-1c4efb7c6351)
 
@@ -476,8 +476,6 @@ df.show()
 ```
 Below is the interface of jupyter notebook:
 ![image](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/771d3b28-5246-425b-8b0a-665d65663b7e)
-
-If that works, you’re all done!
 
 ### Clean up resources
 
