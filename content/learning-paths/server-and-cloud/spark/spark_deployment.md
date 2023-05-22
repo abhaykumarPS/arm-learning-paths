@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 
 ##  Deploy a single node of Spark 
-Apache Spark is an open-source, distributed processing system used for big data workloads. It utilizes in-memory caching and optimized query execution for fast queries against data of any size. Simply put, Spark is a fast and general engine for large-scale data processing.
+Apache Spark is an open-source, distributed processing system used for big data workloads. It utilizes in-memory caching and optimized query execution for fast queries against data of any size. Simply we can say, Spark is a fast and general engine for large-scale data processing.
 
 You can deploy Spark on AWS Graviton processors using Terraform. 
 In this topic, you will deploy Spark on a single AWS EC2 instance. 
@@ -232,7 +232,7 @@ ssh ubuntu@Master_public_IP
 ```
 **Installation of required dependencies on AWS EC2 instance:**
 
-For deploying Spark on aws graviton2, we need to install below tools and dependencies on our ec2 instance
+For deploying Spark on aws graviton2, we need to install below tools and dependencies on our ec2 instance:
 ```console
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -253,19 +253,22 @@ pip3 install pyspark
 ```
 **Config Jupyter notebook:**
 
-Jupyter comes with Anaconda, but we will need to configure it in order to use it through EC2 and connect with SSH. Go ahead and generate a configuration file for Jupyter using:
+Jupyter comes with Anaconda, but we will need to configure it in order to use it through EC2 and connect with SSH. Generate a configuration file for Jupyter using:
 ```console
  jupyter notebook --generate-config
 ```
 **Create Certifications:**
 
-We can also create certifications for our connections in the form of .pem files. Perform the following:
+We can also create certifications for our connections in the form of .pem files. 
+Perform the following:
 ```console
  mkdir cert/
  cd cert/
  sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mycert.pem -out mycert.pem
 ```
+{{% notice Note %}}
 You’ll get asked some general questions after running that last line. Just fill them out with some general information.
+{{% /notice %}}
 
 **Edit Configuration File:**
 
@@ -274,7 +277,7 @@ Next we need to finish editing the Jupyter Configuration file we created earlier
 ```console
 cd ~/.jupyter/
 ```
-Then we will use visual editor (vi) to edit the file. Type:
+Then we will use any editor to edit the file. Here we are uisng visual editor(vi).Type:
 ```console
 vi jupyter_notebook_config.py
 ```
@@ -287,16 +290,16 @@ c.NotebookApp.ip = '*'
 c.NotebookApp.port = 8888 
 c.NotebookApp.open_browser = False
  ```
-Once you’ve typed/pasted this code in your config file, press Esc to stop inserting. Then type a colon : and then type wq to write and quit the editor.
+Once you’ve typed/pasted this code in your config file, save your file and quit the editor.
 
-Last, you can create a dummy file(.json) for checking that Spark is working or not:
+Lastly, you can create a dummy file(.json) for checking that Spark is working or not:
  
  ```console
 {"Country":"Singapore"}
 {"Country":"India","Capital":"New Delhi"}
 {"Country":"UK","Capital":"London","Population":"78M"}
 ```
-Now you can follow [this](learning-paths/server-and-cloud/spark/spark_deployment.md#check-that-jupyter-notebook-is-working-with-spark) to Check that Jupyter Notebook is working with spark
+Now you can follow [this](/learning-paths/server-and-cloud/spark/spark_deployment#check-that-jupyter-notebook-is-working-with-spark) to Check that Jupyter Notebook is working with spark
 
 {{% notice Note %}} You can follow the above mentioned steps for configuring spark manually or you can follow the below ansible steps for configuration of spark in aws ec2 instance. {{% /notice %}}
 
@@ -375,7 +378,7 @@ Run the playbook using the `ansible-playbook` command:
 ```console
 ansible-playbook spark.yaml -i /tmp/inventory
 ```
-Answer yes when prompted for the SSH connection.
+Answer **yes** when prompted for the SSH connection.
 
 Deployment may take a few minutes.
 
@@ -450,7 +453,7 @@ You should now have everything set up to launch Juptyer notebook with Spark! Run
 ```console
 jupyter notebook
 ```
-The below interface is shown in terminal after applying `jupyter notebook` command
+The below interface will be shown in terminal after applying `jupyter notebook` command:
 
 ![image](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/b56893c2-6ce4-4b05-b00c-4aab2b845565)
 
@@ -461,12 +464,14 @@ https://<Public_DNS_Of_Your_Ec2_instance>:8888/?token=f5d44e8faa19f9b08bd3820e70
 
 ```
 After putting that into your browser you’ll probably get an interface as showing below:
+
 ![spark1](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/f714bd0e-ff11-4446-af87-61f7e58f8824)
 
 Now, you can click on the new and then click on Python3 (ipykernel) for accessing the jupyter notebook:
+
 ![spark2](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/50fd6d68-77e9-4e83-b270-1c4efb7c6351)
 
-Now, Run the below code line by line in jupyter notebook:
+Now, run the below code line by line in jupyter notebook:
 
 ```console
 import findspark
@@ -476,7 +481,7 @@ spark = SparkSession.builder.appName('myApp').getOrCreate()
 df = spark.read.json('test.json') 
 df.show()
 ```
-below is the interface of jupyter notebook:
+Below is the interface of jupyter notebook:
 ![image](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/771d3b28-5246-425b-8b0a-665d65663b7e)
 
 If that works, you’re all done!
