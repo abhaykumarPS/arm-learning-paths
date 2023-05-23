@@ -296,7 +296,7 @@ Lastly, create a dummy file(.json) for checking whether Spark is working or not:
 {"Country":"India","Capital":"New Delhi"}
 {"Country":"UK","Capital":"London","Population":"78M"}
 ```
-Now follow [this](/learning-paths/server-and-cloud/spark/spark_deployment#verify-working-of-jupyter-notebook) to Check that Jupyter Notebook is working with Spark.
+Now follow these [steps](/learning-paths/server-and-cloud/spark/spark_deployment#verify-working-of-jupyter-notebook) to verify the working of the Jupyter Notebook.
 
 {{% notice Note %}} Follow the above mentioned steps for configuring Spark manually or follow the below ansible steps for configuration of Spark in AWS EC2 instance. {{% /notice %}}
 
