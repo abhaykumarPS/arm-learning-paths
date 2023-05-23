@@ -204,13 +204,12 @@ Answer `yes` to the prompt to confirm you want to create AWS resources.
 The public IP address will be different, but the output should be similar to:
 
 ```output
-Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
-
 Outputs:
 
 Master_public_IP = [
-  "13.58.17.252",
+  "18.217.147.103",
 ]
+
 
 ```
 ## Configure Spark manually
@@ -382,62 +381,64 @@ Deployment may take a few minutes.
 
 The output should be similar to:
 ```output
-root@ip-172-31-38-39:/home/ubuntu/spark# ansible-playbook spark.yaml -i /tmp/inventor
+root@ip-172-31-38-39:/home/ubuntu/spark# ansible-playbook spark.yaml -i /tmp/inventory
 
-PLAY [spark config] ***********************************************************************************************************************
+PLAY [Spark config] ***********************************************************************************************************************
 
 TASK [Gathering Facts] ********************************************************************************************************************
-ok: [18.119.110.6]
+The authenticity of host '18.217.147.103 (18.217.147.103)' can't be established.
+ED25519 key fingerprint is SHA256:HuMSX7ew6buDFqQglOA5ftM8RrQwlitmHe2JDrNjZWY.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+ok: [18.217.147.103]
 
 TASK [Update the Machine & Install Dependencies] ******************************************************************************************
-changed: [18.119.110.6]
+changed: [18.217.147.103]
 
 TASK [Update apt repo and cache on all Debian/Ubuntu boxes] *******************************************************************************
-ok: [18.119.110.6]
+changed: [18.217.147.103]
 
 TASK [Install Python pip & Python package] ************************************************************************************************
-changed: [18.119.110.6] => (item=python3-pip)
+changed: [18.217.147.103] => (item=python3-pip)
 
 TASK [Install jupyter] ********************************************************************************************************************
-changed: [18.119.110.6]
+changed: [18.217.147.103]
 
 TASK [Install Java and related Dependencies] **********************************************************************************************
-changed: [18.119.110.6]
+changed: [18.217.147.103]
 
 TASK [Install scala] **********************************************************************************************************************
-changed: [18.119.110.6]
+changed: [18.217.147.103]
 
-TASK [Update the Machine & Install Dependencies] ******************************************************************************************
-changed: [18.119.110.6]
+TASK [Enable Python interpreter] **********************************************************************************************************
+changed: [18.217.147.103]
 
 TASK [Install openssl] ********************************************************************************************************************
-changed: [18.119.110.6]
+changed: [18.217.147.103]
 
 TASK [Install spark] **********************************************************************************************************************
-changed: [18.119.110.6]
+changed: [18.217.147.103]
 
 TASK [Install and extract spark binary] ***************************************************************************************************
-changed: [18.119.110.6]
+changed: [18.217.147.103]
 
 TASK [configure jupyter notebook] *********************************************************************************************************
-changed: [18.119.110.6]
+changed: [18.217.147.103]
 
 TASK [Change file path and assigned priveledges] ******************************************************************************************
-changed: [18.119.110.6]
+changed: [18.217.147.103]
 
-TASK [Create directory and config Jupyter notebook] ***************************************************************************************
-changed: [18.119.110.6]
+TASK [Create directory and add certification for Jupyter notebook] ************************************************************************
+changed: [18.217.147.103]
 
 TASK [Edit Configuration File] ************************************************************************************************************
-changed: [18.119.110.6]
+changed: [18.217.147.103]
 
-TASK [Creating a json file] ***************************************************************************************************************
-changed: [18.119.110.6]
+TASK [Creating a dummy .json file] ********************************************************************************************************
+changed: [18.217.147.103]
 
 PLAY RECAP ********************************************************************************************************************************
-18.119.110.6               : ok=16   changed=14   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-
-
+18.217.147.103             : ok=16   changed=15   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 ## Verify working of Jupyter Notebook
