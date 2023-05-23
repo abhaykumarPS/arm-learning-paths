@@ -458,7 +458,7 @@ The below interface will be shown in the terminal after applying `jupyter notebo
 You’ll see an output saying that a Jupyter notebook is running at all IP addresses at port 8888. Go to a web browser and type Public DNS of Amazon EC2 instance followed by:8888. It should be in the form:
 
 ```console
-https://<Public_DNS_Of_Your_Ec2_instance>:8888/?token=f5d44e8faa19f9b08bd3820e700666f176e75920cc5571a3
+https://<Public_DNS_Of_Your_EC2_instance>:8888/?token=f5d44e8faa19f9b08bd3820e700666f176e75920cc5571a3
 
 ```
 After putting that into the browser, an interface as shown below will be seen:
