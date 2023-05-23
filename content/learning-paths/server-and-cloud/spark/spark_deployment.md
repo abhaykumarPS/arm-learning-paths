@@ -469,7 +469,7 @@ Now, click on the new and then on Python3 (ipykernel) for accessing the Jupyter 
 
 ![spark2](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/50fd6d68-77e9-4e83-b270-1c4efb7c6351)
 
-Now, run the below code line by line in jupyter notebook:
+Now, run the below code line by line in Jupyter notebook:
 
 ```console
 import findspark
@@ -479,7 +479,7 @@ spark = SparkSession.builder.appName('myApp').getOrCreate()
 df = spark.read.json('test.json') 
 df.show()
 ```
-Below is the interface of jupyter notebook:
+Below is the interface of Jupyter notebook:
 
 ![image](https://github.com/abhaykumarPS/arm-learning-paths/assets/92078754/771d3b28-5246-425b-8b0a-665d65663b7e)
 
