@@ -305,7 +305,7 @@ Now follow [this](/learning-paths/server-and-cloud/spark/spark_deployment#check-
 Using a text editor, save the code below to a file called `spark.yaml`. It will install the Spark and the required dependencies. Below is the YAML file for the Ansible playbook.
 ```console
 ---
-- name: spark config
+- name: Spark config
   hosts: all
   become: true
   become_user: root
@@ -325,10 +325,10 @@ Using a text editor, save the code below to a file called `spark.yaml`. It will 
     - name: Install jupyter
       shell: pip3 install jupyter
     - name: Install Java and related Dependencies
-      shell: sudo apt-get install -y default-jre default-jdk vim wget
+      shell: sudo apt-get install -y default-jre default-jdk 
     - name: Install scala
       shell: sudo apt-get install -y scala
-    - name: Update the Machine & Install Dependencies
+    - name: Enable Python interpreter
       shell: pip3 install py4j
     - name: Install openssl
       shell: sudo apt install openssl -y
@@ -346,7 +346,7 @@ Using a text editor, save the code below to a file called `spark.yaml`. It will 
               sudo mv /root/.jupyter /home/ubuntu/
               sudo chown $USER:$USER /home/ubuntu/.jupyter/
               sudo chmod 777 /home/ubuntu/.jupyter/
-    - name: Create directory and config Jupyter notebook
+    - name: Create directory and add certification for Jupyter notebook
       shell: |
               mkdir cert
               cd cert
@@ -369,8 +369,8 @@ Using a text editor, save the code below to a file called `spark.yaml`. It will 
              {"Country":"Singapore"}
              {"Country":"India","Capital":"New Delhi"}
              {"Country":"UK","Capital":"london","Population":"78M"}
-
 ```
+
 ## Ansible Commands
 Run the playbook using the `ansible-playbook` command:
 ```console
